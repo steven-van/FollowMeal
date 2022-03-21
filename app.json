@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "follow-meal",
+    "slug": "follow-meal",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "follow-meal"
+}
