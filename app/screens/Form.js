@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <View style={{display:'flex',justifyContent:'center'}}>
+      <View>
         <Image style={styles.image} source={ICON} />
         <Text>
           {"Veuillez renseigner les informations ci-dessous"}
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   image: {
     width: 126,
     height: 126,
+    alignItems:'center',
   },
   button: {
     margin: 7,
