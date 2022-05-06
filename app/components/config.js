@@ -3,7 +3,7 @@ export const RED = "#DE4E4E";
 export const GRAY = "#B6B6B6";
 export const LIGHTGRAY = "#DAD5D5";
 export const ICON = require("../../assets/follow_meal.png");
-export const STORYSET = require("../../assets/storyset1.png");
+export const STORYSET = require("../../assets/salad-girl.png");
 export const STYLE = {
   container: {
     flex: 1,
@@ -39,7 +39,6 @@ export const STYLE = {
     fontSize: 16,
   },
   inputText: {
-    outlineStyle: "none",
     fontFamily: "Roboto",
     fontSize: 12,
     paddingHorizontal: 10,

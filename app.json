@@ -3,9 +3,10 @@
     "name": "follow-meal",
     "slug": "follow-meal",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "splash": {
+      "image": "./assets/splashscreen.png"
+    }
   },
   "name": "follow-meal"
 }
