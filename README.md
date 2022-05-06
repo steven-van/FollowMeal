@@ -1,5 +1,13 @@
 # FollowMeal
 
+## Preview
+
+TO-DO
+
+## Building
+
+Make sure to install all dependencies before running the project `npm run web`.
+
 ## Dependencies
 
 ### Expo cli
