@@ -1,37 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import AppIntroSlider from 'react-native-app-intro-slider';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import AppIntroSlider from "react-native-app-intro-slider";
 
-import {ICON, GREEN, LIGHTGRAY, RED, STYLE, STORYSET} from '../components/config.js';
-import { TextInput, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { useFonts, FredokaOne_400Regular } from '@expo-google-fonts/fredoka-one';
-import { Roboto_400Regular } from '@expo-google-fonts/roboto';
+import {
+  ICON,
+  GREEN,
+  LIGHTGRAY,
+  RED,
+  STYLE,
+  STORYSET,
+} from "../components/config.js";
+import {
+  TextInput,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import {
+  useFonts,
+  FredokaOne_400Regular,
+} from "@expo-google-fonts/fredoka-one";
+import { Roboto_400Regular } from "@expo-google-fonts/roboto";
 
-export default function Slider() {
+const slides = [
+  {
+    name: "welcome",
+    description:
+      "Suivez votre alimentation de près et" +
+      "adopter un mode de vie sain et surtout pas cher !",
+    icon: STORYSET,
+  },
+  {
+    name: "form",
+    description: "Veuillez renseigner les informations ci-dessous",
+  },
+];
 
+const Slider = () => {
   let [fontsLoaded] = useFonts({
-    FredokaOne:FredokaOne_400Regular,
-    Roboto:Roboto_400Regular
-  })
+    FredokaOne: FredokaOne_400Regular,
+    Roboto: Roboto_400Regular,
+  });
 
   const [age, setAge] = React.useState(0);
   const [height, setHeight] = React.useState(0);
   const [weight, setWeight] = React.useState(0);
   const [sportPerWeek, setSportPerWeek] = React.useState(0);
   const [goalPerMeal, setGoalPerMeal] = React.useState(0);
-
-  const slides = [
-    {
-      name:"welcome",
-      description:"Suivez votre alimentation de près et"+
-      "adopter un mode de vie sain et surtout pas cher !",
-      icon:STORYSET,
-    },
-    {
-      name:"form",
-      description:"Veuillez renseigner les informations ci-dessous",
-    }
-  ];
 
   /*
   _renderItem = ({item}) => {
@@ -142,112 +159,106 @@ export default function Slider() {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image style={styles.mediumIcon} source={ICON} />
-        <Text style={styles.desc}>
-          {slides[1].description}
-        </Text>
+        <Text style={styles.desc}>{slides[1].description}</Text>
       </View>
 
       <View style={styles.form}>
-        
         <View style={styles.input}>
           <Text style={styles.inputTag}>{"Age"}</Text>
-          <View style={styles.inputInnerContainer}>
-            <TextInput
-              placeholder="Un nombre"
-              placeholderTextColor={LIGHTGRAY}
-              style={styles.inputText}/>
-          </View>
+          <TextInput
+            placeholder="Ex : 18"
+            placeholderTextColor={LIGHTGRAY}
+            style={styles.inputText}
+          />
+          <Text style={styles.units}>{""}</Text>
         </View>
 
         <View style={styles.input}>
           <Text style={styles.inputTag}>{"Taille"}</Text>
-          <View style={styles.inputInnerContainer}>
-            <TextInput
-              placeholder="En cm"
-              placeholderTextColor={LIGHTGRAY}
-              style={styles.inputText}/>
-          </View>
+          <TextInput
+            placeholder="Ex : 170"
+            placeholderTextColor={LIGHTGRAY}
+            style={styles.inputText}
+          />
+          <Text style={styles.units}>{"cm"}</Text>
         </View>
 
         <View style={styles.input}>
           <Text style={styles.inputTag}>{"Poids"}</Text>
-          <View style={styles.inputInnerContainer}>
-            <TextInput
-              placeholder="En kg"
-              placeholderTextColor={LIGHTGRAY}
-              style={styles.inputText}/>
-          </View>
+          <TextInput
+            placeholder="Ex : 60"
+            placeholderTextColor={LIGHTGRAY}
+            style={styles.inputText}
+          />
+          <Text style={styles.units}>{"kg"}</Text>
         </View>
 
         <View style={styles.input}>
           <Text style={styles.inputTag}>{"Pratique sportive"}</Text>
-          <View style={styles.inputInnerContainer}>
-            <TextInput
-              placeholder="Jour(s) par semaine"
-              placeholderTextColor={LIGHTGRAY}
-              style={styles.inputText}/>
-          </View>
+          <TextInput
+            placeholder="Ex : 3"
+            placeholderTextColor={LIGHTGRAY}
+            style={styles.inputText}
+          />
+          <Text style={styles.units}>{"jours / semaine"}</Text>
         </View>
 
         <View style={styles.input}>
           <Text style={styles.inputTag}>{"Objectif"}</Text>
-          <View style={styles.inputInnerContainer}>
-            <TextInput
-              placeholder="Euro par repas"
-              placeholderTextColor={LIGHTGRAY}
-              style={styles.inputText}/>
-          </View>
+          <TextInput
+            placeholder="Ex : 10"
+            placeholderTextColor={LIGHTGRAY}
+            style={styles.inputText}
+          />
+          <Text style={styles.units}>{"€ / repas"}</Text>
         </View>
-
       </View>
 
-      <View style={[styles.buttonContainer, styles.buttonWidth]}>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={null}>
-          <View
-            style={[styles.button, styles.confirm]}
-          >
-            <Text style={styles.buttonText}>
-              {"Confirm"}
-            </Text>
+          <View style={[styles.button, styles.confirm]}>
+            <Text style={styles.buttonText}>{"Confirmer"}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
     </View>
-    )
-}
+  );
+};
+
+export default Slider;
 
 const styles = StyleSheet.create({
   ...STYLE,
-  form:{
-    width:"100%",
+  form: {
+    width: "100%",
+    marginBottom: 25,
   },
-  desc:{
-    fontFamily:'FredokaOne',
-    textAlign:'center',
-    width:'70%',
-  },
-  sliderCricle:{
-    width: 40,
-    height: 40,
-    backgroundColor: GREEN,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+  desc: {
+    fontFamily: "FredokaOne",
+    textAlign: "center",
+    width: "70%",
+    fontSize: 15,
+    marginTop: 25,
   },
   confirm: {
     backgroundColor: GREEN,
   },
-  input:{
-    flexDirection:'row',
-    alignContent:'center',
-    alignItems:'center',
-    justifyContent:'space-evenly',
-    margin:5,
+  input: {
+    flexDirection: "row",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 25,
   },
-  inputTag:{
+  inputTag: {
     ...STYLE.inputTag,
-    width:'20%',
-    textAlign:'right',
-  }
+    width: 85,
+    textAlign: "right",
+  },
+  units: {
+    fontSize: 12,
+    fontFamily: "FredokaOne",
+    width: 60,
+  },
 });
