@@ -40,7 +40,7 @@ npm install
 # in project folder !!
 npm install @react-navigation/bottom-tabs
 ```
-npm install -g react-native-cli
+
 ### Fonts
 ```bash
 expo install expo-font @expo-google-font/fredoka-one
