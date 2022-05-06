@@ -4,7 +4,7 @@
 
 ### Expo cli
 
-```
+```bash
 # anywhere
 sudo npm install -g expo-cli
 
@@ -14,23 +14,27 @@ npx expo install expo-splash-screen@~0.15.1 expo-status-bar@~1.3.0 react@17.0.2 
 
 ### Reac Native cli
 
-```
+```bash
 # anywhere
 sudo npm install -g react-native-cli
 ```
 
 ### React Native
-```
+
+```bash
 # in project folder
 npm install
 ```
 
 ### React Navigator
 
-```
+```bash
 # in project folder !!
 npm install @react-navigation/bottom-tabs
-``` 
+```
+npm install -g react-native-cli
 ### Fonts
-`expo install expo-font @expo-google-font/fredoka-one`
-`expo install expo-font @expo-google-font/roboto`
+```bash
+expo install expo-font @expo-google-font/fredoka-one
+expo install expo-font @expo-google-font/roboto
+```
