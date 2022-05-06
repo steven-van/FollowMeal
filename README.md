@@ -6,7 +6,7 @@ TO-DO
 
 ## Building
 
-Make sure to install all dependencies before running the project `npm run web`.
+Make sure to install all dependencies with `npm install` in your project folder. Then `npm run web`
 
 ## Dependencies
 
@@ -25,11 +25,4 @@ npx expo install expo-splash-screen@~0.15.1 expo-status-bar@~1.3.0 react@17.0.2 
 ```bash
 # anywhere
 sudo npm install -g react-native-cli
-```
-
-### Node modules
-
-```bash
-# in project folder
-npm install
 ```
