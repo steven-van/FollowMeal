@@ -6,8 +6,7 @@ TO-DO
 
 ## Building
 
-Make sure to install all dependencies before running the project with `npm install` in your project folder
-Then `npm run web`
+Make sure to install all dependencies with `npm install` in your project folder. Then `npm run web`
 
 ## Dependencies
 
