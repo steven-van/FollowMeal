@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "follow-meal",
+    "android": { "softwareKeyboardLayoutMode": "pan" },
     "slug": "follow-meal",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
