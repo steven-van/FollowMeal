@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   View,
+  SafeAreaView,
   Image,
   TouchableOpacity,
 } from "react-native";
@@ -26,7 +27,7 @@ const Home = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
         <Image style={styles.mediumIcon} source={ICON} />
       </View>
@@ -64,7 +65,7 @@ const Home = (props) => {
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 };
 

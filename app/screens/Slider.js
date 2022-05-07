@@ -15,6 +15,7 @@ import {
   StyleSheet,
   Text,
   View,
+  SafeAreaView,
   Image,
   TouchableOpacity,
 } from "react-native";
@@ -156,7 +157,7 @@ const Slider = () => {
   //   <AppIntroSlider renderItem ={_render} data={slides}/>
   // );
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Image style={styles.mediumIcon} source={ICON} />
         <Text style={styles.desc}>{slides[1].description}</Text>
@@ -222,7 +223,7 @@ const Slider = () => {
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 };
 
