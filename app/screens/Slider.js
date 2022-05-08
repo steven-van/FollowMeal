@@ -6,7 +6,7 @@ import Input from "../components/Input";
 import InputLabel from "../components/InputLabel";
 import Button from "../components/Button";
 import Title from "../components/Title";
-import Container from "../components/Container";
+import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE, STORYSET } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
 
@@ -154,7 +154,7 @@ const Slider = () => {
   //   <AppIntroSlider renderItem ={_render} data={slides}/>
   // );
   return (
-    <Container>
+    <SafeContainer>
       <Image style={styles.mediumIcon} source={ICON} />
       <Title
         fontSize={"15px"}
@@ -207,7 +207,7 @@ const Slider = () => {
       <Button>{"Confirmer"}</Button>
 
       <StatusBar style="auto" />
-    </Container>
+    </SafeContainer>
   );
 };
 

@@ -17,11 +17,9 @@ const Input = ({
   secureTextEntry = false,
   maxLength,
   type = "default",
-  width,
 }) => {
   return (
     <InputContainer
-      customWidth={width}
       placeholder={placeholder}
       style={additionnalStyle}
       maxLength={maxLength}

@@ -1,17 +1,17 @@
 import styled from "styled-components/native";
 import { Platform } from "react-native";
-const SafeContainer = styled.SafeAreaView`
+const Container = styled.SafeAreaView`
   flex: 1;
   background-olor: #ffffff;
   align-items: center;
   justify-content: center;
 `;
-const Container = ({ children }) => {
+const SafeContainer = ({ children }) => {
   return (
-    <SafeContainer style={{ paddingTop: Platform.OS === "android" ? 25 : 0 }}>
+    <Container style={{ paddingTop: Platform.OS === "android" ? 25 : 0 }}>
       {children}
-    </SafeContainer>
+    </Container>
   );
 };
 
-export default Container;
+export default SafeContainer;

@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
-import Container from "../components/Container";
+import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
 
@@ -23,7 +23,7 @@ const Home = (props) => {
   };
 
   return (
-    <Container>
+    <SafeContainer>
       <Image style={styles.mediumIcon} source={ICON} />
 
       <Title fontSize={"25px"} additionnalStyle={{ marginTop: 30 }}>
@@ -48,7 +48,7 @@ const Home = (props) => {
       <Button handlePress={pressLogin}>{"Se connecter"}</Button>
 
       <StatusBar style="auto" />
-    </Container>
+    </SafeContainer>
   );
 };
 
