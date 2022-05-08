@@ -166,19 +166,24 @@ const Slider = () => {
       <Form>
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Age"}</InputLabel>
-          <Input placeholder={"Ex : 18"} />
+          <Input type={"numeric"} maxLength={2} placeholder={"Ex : 18"} />
           <Unit>{""}</Unit>
         </InputContainer>
 
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Taille"}</InputLabel>
-          <Input placeholder={"Ex : 170"} />
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 170"} />
           <Unit>{"cm"}</Unit>
         </InputContainer>
 
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Poids"}</InputLabel>
-          <Input placeholder={"Ex : 60"} />
+          <Input
+            width={"200px"}
+            type={"numeric"}
+            maxLength={3}
+            placeholder={"Ex : 60"}
+          />
           <Unit>{"kg"}</Unit>
         </InputContainer>
 
@@ -186,7 +191,7 @@ const Slider = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Pratique sportive"}
           </InputLabel>
-          <Input placeholder={"Ex : 3"} />
+          <Input type={"numeric"} maxLength={1} placeholder={"Ex : 3"} />
           <Unit>{"jours / semaine"}</Unit>
         </InputContainer>
 
@@ -194,7 +199,7 @@ const Slider = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Objectif"}
           </InputLabel>
-          <Input placeholder={"Ex : 18"} />
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 18"} />
           <Unit>{"€ / repas"}</Unit>
         </InputContainer>
       </Form>

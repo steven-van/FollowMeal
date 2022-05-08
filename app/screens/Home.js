@@ -34,7 +34,7 @@ const Home = (props) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} />
+          <Input  placeholder={"Email"} />
         </InputContainer>
 
         <InputContainer>
