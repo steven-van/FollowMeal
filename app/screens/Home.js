@@ -45,7 +45,7 @@ const Home = (props) => {
         </InputContainer>
       </LoginContainer>
 
-      <Button pressLogin={pressLogin}>{"Se connecter"}</Button>
+      <Button handlePress={pressLogin}>{"Se connecter"}</Button>
 
       <StatusBar style="auto" />
     </Container>

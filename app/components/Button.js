@@ -1,10 +1,6 @@
 import styled from "styled-components/native";
 import { View, TouchableOpacity } from "react-native";
 import { GREEN, LIGHTGRAY } from "../components/config.js";
-import {
-  useFonts,
-  FredokaOne_400Regular,
-} from "@expo-google-fonts/fredoka-one";
 
 const ButtonContainer = styled.View`
   background-color: ${LIGHTGRAY};
@@ -21,13 +17,10 @@ const ButtonText = styled.Text`
   font-size: 16px;
 `;
 
-const Button = ({ children, pressLogin, additionnalStyle }) => {
-  let [fontsLoaded] = useFonts({
-    FredokaOne: FredokaOne_400Regular,
-  });
+const Button = ({ children, handlePress, additionnalStyle }) => {
   return (
     <View style={additionnalStyle}>
-      <TouchableOpacity onPress={pressLogin}>
+      <TouchableOpacity onPress={handlePress}>
         <ButtonContainer>
           <ButtonText>{children}</ButtonText>
         </ButtonContainer>

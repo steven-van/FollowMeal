@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { RED } from "../components/config.js";
 
 const InputContainer = styled.TextInput`
+  min-width: 100px;
   font-family: "Roboto";
   font-size: 12px;
   padding: 10px;
