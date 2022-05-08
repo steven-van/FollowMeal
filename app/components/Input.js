@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 import { RED } from "../components/config.js";
-import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
 const InputContainer = styled.TextInput`
   font-family: "Roboto";
@@ -12,9 +11,6 @@ const InputContainer = styled.TextInput`
 `;
 
 const Input = ({ placeholder, additionnalStyle, secureTextEntry = false }) => {
-  let [fontsLoaded] = useFonts({
-    Roboto: Roboto_400Regular,
-  });
   return (
     <InputContainer
       placeholder={placeholder}

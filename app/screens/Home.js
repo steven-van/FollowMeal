@@ -6,7 +6,7 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import Container from "../components/Container";
 import { ICON, STYLE } from "../components/config.js";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, Image } from "react-native";
 
 const LoginContainer = styled.View`
   width: 60%;
