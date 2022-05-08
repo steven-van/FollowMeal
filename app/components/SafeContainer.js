@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { Platform } from "react-native";
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-olor: #ffffff;
+  background-color: #ffffff;
   align-items: center;
   justify-content: center;
 `;

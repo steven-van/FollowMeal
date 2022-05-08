@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Home from "./app/screens/Home.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import Slider from "./app/screens/Slider.js";
-import { GRAY, GREEN } from "./app/components/config.js";
+import { GREEN, RED } from "./app/components/config.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -80,9 +80,17 @@ const App = () => {
             // Icon returned
             return <Icon name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: GREEN,
-          tabBarInactiveTintColor: GRAY,
+          tabBarStyle: {
+            height: 40,
+            marginHorizontal: 20,
+            marginBottom: 10,
+            borderRadius: 20,
+            backgroundColor: GREEN,
+          },
+          tabBarActiveTintColor: RED,
+          tabBarInactiveTintColor: "#FFFFFF",
           headerShown: false,
+          tabBarShowLabel: false,
         })}
       >
         <Tab.Screen name={"Home"} component={Home} />
