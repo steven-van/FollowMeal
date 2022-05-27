@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -17,10 +18,11 @@ const LoginContainer = styled.View`
 const InputContainer = styled.View`
   margin-top: 30px;
 `;
+
 const Home = (props) => {
-  const [logged, setLogin] = React.useState(false);
-  const [user, setUser] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [logged, setLogin] = useState(false);
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
 
   const storeToken = async (value) => {
     try {
