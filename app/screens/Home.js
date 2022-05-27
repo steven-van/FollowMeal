@@ -9,6 +9,8 @@ import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { host } from "../config/host";
+
 const LoginContainer = styled.View`
   width: 60%;
   margin-bottom: 30px;
@@ -27,31 +29,32 @@ const storeToken = async (value) => {
   }
 };
 
-const login = async(credentials) => {
-  return fetch('http://127.0.0.1:3000/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-      })
-      .then(response => {
-        console.log(response);
-        response = JSON.parse(response);
-        console.log(response);
-        if (response.login == true && response.data != "expired")
-        {
-          props.navigation.navigate('Slider', response.data);
-        }
-      })
-      .catch(err => console.log("ERROR : " + err))
-};
-
 // Component
 const Home = ({navigation}) => {
   
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+
+  const login = async(credentials) => {
+    console.log("Trying connection...");
+    return fetch(`http://${host}:3000/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+        })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+          if (json.login == true && json.data != "expired")
+          {
+            storeToken(json.token);
+            navigation.navigate('Slider', json.data);
+          }
+        })
+        .catch(err => console.log("ERROR : " + err))
+  };
 
   const pressLogin = () => {
     login({user,password});
