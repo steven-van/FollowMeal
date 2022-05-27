@@ -54,7 +54,7 @@ const Home = ({navigation}) => {
             setError("");
             navigation.navigate('Slider', json.data);
           } else {
-            setError("Indentifiant ou mot de passe incorrect");
+            setError("Identifiant ou mot de passe incorrect");
           }
         })
         .catch(err => console.log("ERROR : " + err))
@@ -93,7 +93,7 @@ const Home = ({navigation}) => {
       >
         {error}
       </Title>
-      
+
       <Button handlePress={pressLogin}>{"Se connecter"}</Button>
 
       <StatusBar style="auto" />
