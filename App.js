@@ -45,24 +45,6 @@ const App = () => {
   if (!appIsReady) {
     return null;
   }
-  /*
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }}>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-      />
-      <Stack.Screen
-        name="Form"
-        component={Form}
-      />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-  */
 
   return (
     <NavigationContainer onReady={onLayoutRootView}>

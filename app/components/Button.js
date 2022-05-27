@@ -26,13 +26,6 @@ const Button = ({ children, handlePress, additionnalStyle }) => {
         </ButtonContainer>
       </TouchableOpacity>
     </View>
-    /* <View style={styles.buttonContainer}>
-      <TouchableOpacity onPress={pressLogin}>
-        <View style={[styles.button, styles.login]}>
-          <Text style={styles.buttonText}>{"Se connecter"}</Text>
-        </View>
-      </TouchableOpacity>
-    </View> */
   );
 };
 

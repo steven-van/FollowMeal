@@ -7,6 +7,7 @@ import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginContainer = styled.View`
   width: 60%;
@@ -17,6 +18,28 @@ const InputContainer = styled.View`
   margin-top: 30px;
 `;
 const Home = (props) => {
+  const [logged, setLogin] = React.useState(false);
+  const [user, setUser] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const storeToken = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("auth_token", jsonValue);
+    } catch (e) {
+      console.log("ERROR : Counldn't save token");
+    }
+  };
+
+  const getToken = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("auth_token");
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log("ERROR : Counldn't get token");
+    }
+  };
+
   const pressLogin = () => {
     props.navigation.navigate("Slider");
     console.log("Redirecting to Slider's screen");
@@ -34,7 +57,7 @@ const Home = (props) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input  placeholder={"Email"} />
+          <Input placeholder={"Email"} />
         </InputContainer>
 
         <InputContainer>
