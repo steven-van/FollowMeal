@@ -26,3 +26,10 @@ npx expo install expo-splash-screen@~0.15.1 expo-status-bar@~1.3.0 react@17.0.2 
 # anywhere
 sudo npm install -g react-native-cli
 ```
+
+## Setting host file
+
+Get your IPV4 with `ipconfig` or `ipaddr` and put it in the following file `./config/host.js` :
+```js
+module.exports = {host:"YOUR IP ADDR"};
+```
