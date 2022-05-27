@@ -7,8 +7,9 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
-import { StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RED } from "../components/config.js";
 import { host } from "../config/host";
 
 const LoginContainer = styled.View`
@@ -34,6 +35,7 @@ const Home = ({navigation}) => {
   
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const login = async(credentials) => {
     console.log("Trying connection...");
@@ -46,11 +48,13 @@ const Home = ({navigation}) => {
         })
         .then(response => response.json())
         .then(json => {
-          console.log(json);
           if (json.login == true && json.data != "expired")
           {
             storeToken(json.token);
+            setError("");
             navigation.navigate('Slider', json.data);
+          } else {
+            setError("Indentifiant ou mot de passe incorrect");
           }
         })
         .catch(err => console.log("ERROR : " + err))
@@ -83,6 +87,13 @@ const Home = ({navigation}) => {
         </InputContainer>
       </LoginContainer>
 
+      <Title
+        fontSize={"13px"}
+        additionnalStyle={{ width: "70%", textAlign: "center", marginBottom: 20, color:RED }}
+      >
+        {error}
+      </Title>
+      
       <Button handlePress={pressLogin}>{"Se connecter"}</Button>
 
       <StatusBar style="auto" />
