@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Home from "./app/screens/Home.js";
+import Login from "./app/screens/Login.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import Slider from "./app/screens/Slider.js";
 import { GREEN, RED } from "./app/components/config.js";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as SplashScreen from "expo-splash-screen";
 import { Roboto_400Regular } from "@expo-google-fonts/roboto";
@@ -12,42 +11,38 @@ import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { host } from "./app/config/host";
-// import { useFonts, Roboto, FredokaOne} from '@expo-google-fonts/inter';
+import Signup from "./app/screens/Signup.js";
 
-// const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
-
 
 const getToken = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("auth_token");
 
-    if (jsonValue === null){
+    if (jsonValue === null) {
       console.log("No token");
       return {
-        login:false,
-        data:null,
-      }
+        login: false,
+        data: null,
+      };
     } else {
       return fetch(`http://${host}:3000/auth/`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({token:jsonValue})
-        })
-        .then(response => response.json())
-        .then(json => {
-          if (json.login == true && json.data != "expired")
-          {
+        body: JSON.stringify({ token: jsonValue }),
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.login == true && json.data != "expired") {
             // to do, change screen to slider and passing @json.data
             //navigation.navigate('Slider', json.data);
           } else {
             AsyncStorage.removeItem("auth_token");
           }
         })
-        .catch(err => console.log(err))
+        .catch((err) => console.log(err));
     }
   } catch (e) {
     console.log("ERROR " + e);
@@ -55,7 +50,6 @@ const getToken = async () => {
 };
 
 const App = () => {
-
   const [token, setToken] = useState(null);
   const [appIsReady, setAppIsReady] = useState(false);
 
@@ -94,10 +88,12 @@ const App = () => {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === "Home") {
+            if (route.name === "Login") {
               iconName = "ios-person";
             } else if (route.name === "Slider") {
               iconName = "ios-search";
+            } else if (route.name === "Signup") {
+              iconName = "ios-person-add";
             }
 
             // Icon returned
@@ -116,8 +112,9 @@ const App = () => {
           tabBarShowLabel: false,
         })}
       >
-        <Tab.Screen name={"Home"} component={Home} />
+        <Tab.Screen name={"Login"} component={Login} />
         <Tab.Screen name={"Slider"} component={Slider} />
+        <Tab.Screen name={"Signup"} component={Signup} />
       </Tab.Navigator>
     </NavigationContainer>
   );
