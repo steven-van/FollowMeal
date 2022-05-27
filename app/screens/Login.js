@@ -30,37 +30,30 @@ const storeToken = async (value) => {
   }
 };
 
-// Component
-const Home = ({navigation}) => {
-  
+const Login = ({ navigation }) => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const login = async(credentials) => {
+  const handleLogin = async (credentials) => {
     return fetch(`http://${host}:3000/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-        })
-        .then(response => response.json())
-        .then(json => {
-          if (json.login == true && json.data != "expired")
-          {
-            storeToken(json.token);
-            setError("");
-            navigation.navigate('Slider', json.data);
-          } else {
-            setError("Identifiant ou mot de passe incorrect");
-          }
-        })
-        .catch(err => console.log(err))
-  };
-
-  const pressLogin = () => {
-    login({user,password});
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.login == true && json.data != "expired") {
+          storeToken(json.token);
+          setError("");
+          navigation.navigate("Slider", json.data);
+        } else {
+          setError("Identifiant ou mot de passe incorrect");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -75,32 +68,47 @@ const Home = ({navigation}) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Identifiant"} onChangeText={text => setUser(text)} />
+          <Input placeholder={"Email"} onChangeText={(text) => setUser(text)} />
         </InputContainer>
 
         <InputContainer>
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Mot de passe"}
           </InputLabel>
-          <Input placeholder={"Mot de passe"} onChangeText={text => setPassword(text)} secureTextEntry={true}></Input>
+          <Input
+            placeholder={"Mot de passe"}
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry={true}
+          ></Input>
         </InputContainer>
       </LoginContainer>
 
-      <Title
-        fontSize={"13px"}
-        additionnalStyle={{ width: "70%", textAlign: "center", marginBottom: 20, color:RED }}
-      >
-        {error}
-      </Title>
+      {error.length > 0 && (
+        <Title
+          fontSize={"12px"}
+          additionnalStyle={{
+            width: "70%",
+            textAlign: "center",
+            marginBottom: 20,
+            color: RED,
+          }}
+        >
+          {error}
+        </Title>
+      )}
 
-      <Button handlePress={pressLogin}>{"Se connecter"}</Button>
+      <Button
+        handlePress={() => handleLogin({ user: user, password: password })}
+      >
+        {"Se connecter"}
+      </Button>
 
       <StatusBar style="auto" />
     </SafeContainer>
   );
 };
 
-export default Home;
+export default Login;
 
 const styles = StyleSheet.create({
   ...STYLE,

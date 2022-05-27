@@ -4,8 +4,8 @@ import { RED } from "../components/config.js";
 const InputContainer = styled.TextInput`
   min-width: 100px;
   font-family: "Roboto";
-  font-size: 16px;
-  padding: 10px 12px;
+  font-size: 14px;
+  padding: 8px 12px;
   border-radius: 50px;
   border-width: 1px;
   border-color: ${RED};
