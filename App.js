@@ -10,12 +10,26 @@ import * as SplashScreen from "expo-splash-screen";
 import { Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { useFonts, Roboto, FredokaOne} from '@expo-google-fonts/inter';
 
 // const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
+const getToken = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("auth_token");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.log("ERROR : Counldn't get token\n" + e);
+  }
+};
+
 const App = () => {
+
+  const [token, setToken] = useState(null);
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
@@ -26,6 +40,7 @@ const App = () => {
           Roboto: Roboto_400Regular,
           FredokaOne: FredokaOne_400Regular,
         });
+        setToken(await getToken());
       } catch (e) {
         console.warn(e);
       } finally {
