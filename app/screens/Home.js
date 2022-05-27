@@ -26,7 +26,7 @@ const storeToken = async (value) => {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("auth_token", jsonValue);
   } catch (e) {
-    console.log("ERROR : Counldn't save token");
+    console.log(e);
   }
 };
 
@@ -38,7 +38,6 @@ const Home = ({navigation}) => {
   const [error, setError] = useState("");
 
   const login = async(credentials) => {
-    console.log("Trying connection...");
     return fetch(`http://${host}:3000/auth/login`, {
         method: 'POST',
         headers: {
@@ -57,7 +56,7 @@ const Home = ({navigation}) => {
             setError("Identifiant ou mot de passe incorrect");
           }
         })
-        .catch(err => console.log("ERROR : " + err))
+        .catch(err => console.log(err))
   };
 
   const pressLogin = () => {
@@ -76,7 +75,7 @@ const Home = ({navigation}) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={text => setUser(text)} />
+          <Input placeholder={"Identifiant"} onChangeText={text => setUser(text)} />
         </InputContainer>
 
         <InputContainer>

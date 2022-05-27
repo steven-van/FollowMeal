@@ -11,6 +11,7 @@ import { Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { host } from "./app/config/host";
 // import { useFonts, Roboto, FredokaOne} from '@expo-google-fonts/inter';
 
 // const Stack = createStackNavigator();
@@ -21,9 +22,35 @@ const Tab = createBottomTabNavigator();
 const getToken = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("auth_token");
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+
+    if (jsonValue === null){
+      console.log("No token");
+      return {
+        login:false,
+        data:null,
+      }
+    } else {
+      return fetch(`http://${host}:3000/auth/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({token:jsonValue})
+        })
+        .then(response => response.json())
+        .then(json => {
+          if (json.login == true && json.data != "expired")
+          {
+            // to do, change screen to slider and passing @json.data
+            //navigation.navigate('Slider', json.data);
+          } else {
+            AsyncStorage.removeItem("auth_token");
+          }
+        })
+        .catch(err => console.log(err))
+    }
   } catch (e) {
-    console.log("ERROR : Counldn't get token\n" + e);
+    console.log("ERROR " + e);
   }
 };
 
@@ -40,14 +67,13 @@ const App = () => {
           Roboto: Roboto_400Regular,
           FredokaOne: FredokaOne_400Regular,
         });
-        setToken(await getToken());
+        await getToken();
       } catch (e) {
         console.warn(e);
       } finally {
         setAppIsReady(true);
       }
     }
-
     prepare();
   }, []);
 
