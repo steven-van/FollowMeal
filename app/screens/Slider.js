@@ -1,29 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
-
-import {
-  ICON,
-  GREEN,
-  LIGHTGRAY,
-  RED,
-  STYLE,
-  STORYSET,
-} from "../components/config.js";
-import {
-  TextInput,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import {
-  useFonts,
-  FredokaOne_400Regular,
-} from "@expo-google-fonts/fredoka-one";
-import { Roboto_400Regular } from "@expo-google-fonts/roboto";
+import styled from "styled-components/native";
+import Input from "../components/Input";
+import InputLabel from "../components/InputLabel";
+import Button from "../components/Button";
+import Title from "../components/Title";
+import SafeContainer from "../components/SafeContainer";
+import { ICON, STYLE, STORYSET } from "../components/config.js";
+import { StyleSheet, Image } from "react-native";
 
 const slides = [
   {
@@ -39,12 +24,24 @@ const slides = [
   },
 ];
 
-const Slider = () => {
-  let [fontsLoaded] = useFonts({
-    FredokaOne: FredokaOne_400Regular,
-    Roboto: Roboto_400Regular,
-  });
+const Form = styled.View`
+  width: 100%;
+  margin-bottom: 20px;
+`;
+const InputContainer = styled.View`
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 15px;
+`;
 
+const Unit = styled.Text`
+  font-size: 12px;
+  font-family: "FredokaOne";
+  width: 60px;
+`;
+const Slider = () => {
   const [age, setAge] = React.useState(0);
   const [height, setHeight] = React.useState(0);
   const [weight, setWeight] = React.useState(0);
@@ -157,73 +154,60 @@ const Slider = () => {
   //   <AppIntroSlider renderItem ={_render} data={slides}/>
   // );
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Image style={styles.mediumIcon} source={ICON} />
-        <Text style={styles.desc}>{slides[1].description}</Text>
-      </View>
+    <SafeContainer>
+      <Image style={styles.mediumIcon} source={ICON} />
+      <Title
+        fontSize={"15px"}
+        additionnalStyle={{ width: "70%", textAlign: "center", marginTop: 20 }}
+      >
+        {slides[1].description}
+      </Title>
 
-      <View style={styles.form}>
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Age"}</Text>
-          <TextInput
-            placeholder="Ex : 18"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
+      <Form>
+        <InputContainer>
+          <InputLabel additionnalStyle={styles.inputTag}>{"Age"}</InputLabel>
+          <Input type={"numeric"} maxLength={2} placeholder={"Ex : 18"} />
+          <Unit>{""}</Unit>
+        </InputContainer>
+
+        <InputContainer>
+          <InputLabel additionnalStyle={styles.inputTag}>{"Taille"}</InputLabel>
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 170"} />
+          <Unit>{"cm"}</Unit>
+        </InputContainer>
+
+        <InputContainer>
+          <InputLabel additionnalStyle={styles.inputTag}>{"Poids"}</InputLabel>
+          <Input
+            width={"200px"}
+            type={"numeric"}
+            maxLength={3}
+            placeholder={"Ex : 60"}
           />
-          <Text style={styles.units}>{""}</Text>
-        </View>
+          <Unit>{"kg"}</Unit>
+        </InputContainer>
 
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Taille"}</Text>
-          <TextInput
-            placeholder="Ex : 170"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
-          />
-          <Text style={styles.units}>{"cm"}</Text>
-        </View>
+        <InputContainer>
+          <InputLabel additionnalStyle={styles.inputTag}>
+            {"Pratique sportive"}
+          </InputLabel>
+          <Input type={"numeric"} maxLength={1} placeholder={"Ex : 3"} />
+          <Unit>{"jours / semaine"}</Unit>
+        </InputContainer>
 
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Poids"}</Text>
-          <TextInput
-            placeholder="Ex : 60"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
-          />
-          <Text style={styles.units}>{"kg"}</Text>
-        </View>
+        <InputContainer>
+          <InputLabel additionnalStyle={styles.inputTag}>
+            {"Objectif"}
+          </InputLabel>
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 18"} />
+          <Unit>{"€ / repas"}</Unit>
+        </InputContainer>
+      </Form>
 
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Pratique sportive"}</Text>
-          <TextInput
-            placeholder="Ex : 3"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
-          />
-          <Text style={styles.units}>{"jours / semaine"}</Text>
-        </View>
+      <Button>{"Confirmer"}</Button>
 
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Objectif"}</Text>
-          <TextInput
-            placeholder="Ex : 10"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
-          />
-          <Text style={styles.units}>{"€ / repas"}</Text>
-        </View>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={null}>
-          <View style={[styles.button, styles.confirm]}>
-            <Text style={styles.buttonText}>{"Confirmer"}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </SafeContainer>
   );
 };
 
@@ -231,35 +215,8 @@ export default Slider;
 
 const styles = StyleSheet.create({
   ...STYLE,
-  form: {
-    width: "100%",
-    marginBottom: 25,
-  },
-  desc: {
-    fontFamily: "FredokaOne",
-    textAlign: "center",
-    width: "70%",
-    fontSize: 15,
-    marginTop: 25,
-  },
-  confirm: {
-    backgroundColor: GREEN,
-  },
-  input: {
-    flexDirection: "row",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    marginTop: 25,
-  },
   inputTag: {
-    ...STYLE.inputTag,
     width: 85,
     textAlign: "right",
-  },
-  units: {
-    fontSize: 12,
-    fontFamily: "FredokaOne",
-    width: 60,
   },
 });

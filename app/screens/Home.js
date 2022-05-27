@@ -1,71 +1,54 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { ICON, GREEN, LIGHTGRAY, STYLE } from "../components/config.js";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
-import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
-import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
+import styled from "styled-components/native";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import InputLabel from "../components/InputLabel";
+import Title from "../components/Title";
+import SafeContainer from "../components/SafeContainer";
+import { ICON, STYLE } from "../components/config.js";
+import { StyleSheet, Image } from "react-native";
 
+const LoginContainer = styled.View`
+  width: 60%;
+  margin-bottom: 30px;
+`;
+
+const InputContainer = styled.View`
+  margin-top: 30px;
+`;
 const Home = (props) => {
-  // Login listener
-
-  let [fontsLoaded] = useFonts({
-    Roboto: Roboto_400Regular,
-    FredokaOne: FredokaOne_400Regular,
-  });
-
   const pressLogin = () => {
     props.navigation.navigate("Slider");
     console.log("Redirecting to Slider's screen");
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <Image style={styles.mediumIcon} source={ICON} />
-      </View>
+    <SafeContainer>
+      <Image style={styles.mediumIcon} source={ICON} />
 
-      <Text style={styles.desc}>{"Connexion"}</Text>
+      <Title fontSize={"25px"} additionnalStyle={{ marginTop: 30 }}>
+        {"Connexion"}
+      </Title>
+      <LoginContainer>
+        <InputContainer>
+          <InputLabel additionnalStyle={{ marginBottom: 9 }}>
+            {"Identifiant"}
+          </InputLabel>
+          <Input  placeholder={"Email"} />
+        </InputContainer>
 
-      <View style={styles.loginContainer}>
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Identifiant"}</Text>
+        <InputContainer>
+          <InputLabel additionnalStyle={{ marginBottom: 9 }}>
+            {"Mot de passe"}
+          </InputLabel>
+          <Input placeholder={"Mot de passe"} secureTextEntry={true}></Input>
+        </InputContainer>
+      </LoginContainer>
 
-          <TextInput
-            placeholder="E-mail"
-            placeholderTextColor={LIGHTGRAY}
-            style={styles.inputText}
-          />
-        </View>
+      <Button handlePress={pressLogin}>{"Se connecter"}</Button>
 
-        <View style={styles.input}>
-          <Text style={styles.inputTag}>{"Mot de passe"}</Text>
-          <TextInput
-            placeholder="Votre mot de passe"
-            placeholderTextColor={LIGHTGRAY}
-            secureTextEntry={true}
-            value={"abcdefgh"}
-            style={styles.inputText}
-          />
-        </View>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={pressLogin}>
-          <View style={[styles.button, styles.login]}>
-            <Text style={styles.buttonText}>{"Se connecter"}</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </SafeContainer>
   );
 };
 
@@ -73,29 +56,4 @@ export default Home;
 
 const styles = StyleSheet.create({
   ...STYLE,
-  loginContainer: {
-    width: "60%",
-  },
-  login: {
-    marginTop: 30,
-    backgroundColor: GREEN,
-  },
-  inputText: {
-    ...STYLE.inputText,
-    paddingHorizontal: 12,
-    paddingVertical: 9,
-  },
-  input: {
-    flexDirection: "column",
-    marginTop: 30,
-  },
-  inputTag: {
-    ...STYLE.inputTag,
-    marginBottom: 9,
-  },
-  desc: {
-    fontFamily: "FredokaOne",
-    marginTop: 30,
-    fontSize: 25,
-  },
 });
