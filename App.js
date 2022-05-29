@@ -10,7 +10,7 @@ import { Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { host } from "./app/services/host";
+import { host } from "./app/config/host";
 import Signup from "./app/screens/Signup.js";
 import MealForm from "./app/screens/MealForm.js";
 
