@@ -5,7 +5,7 @@ import { Text, View, Dimensions } from "react-native";
 import Svg from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import { host } from "../config/host";
-
+import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 
 const User = ({route, navigation}) => {
 
@@ -56,7 +56,7 @@ const User = ({route, navigation}) => {
         }
       ]
     }}
-    width={Dimensions.get("window").width} // from react-native
+    width={Dimensions.get("window").width - 30} // from react-native
     height={220}
     fromZero = {true}
     yAxisLabel="Score "
@@ -75,8 +75,12 @@ const User = ({route, navigation}) => {
         r: "6",
         strokeWidth: "2",
         stroke: "#DE4E4E"
-      }
+      },
+      propsForLabels:{
+        fontSize : "10",
+    }
     }}
+
     bezier
     style={{
       marginVertical: 8,
