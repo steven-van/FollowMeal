@@ -27,7 +27,6 @@ const ScrollViewContainer = styled.ScrollView`
   margin: 10px 0;
 `;
 
-
 const FormAlert = ({message}) => Alert.alert(
     "Réponse",
     message,

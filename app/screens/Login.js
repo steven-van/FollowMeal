@@ -10,7 +10,7 @@ import { ICON, STYLE } from "../components/config.js";
 import { Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RED } from "../components/config.js";
-import { host } from "../services/host";
+import { host } from "../config/host";
 
 const LoginContainer = styled.View`
   width: 60%;
@@ -69,7 +69,7 @@ const Login = ({ navigation }) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={setUser}  textValue={user}/>
+          <Input placeholder={"Email"} onChangeText={setEmail}  textValue={email}/>
         </InputContainer>
 
         <InputContainer>
