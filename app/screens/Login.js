@@ -69,7 +69,11 @@ const Login = ({ navigation }) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={setUser}  textValue={user}/>
+          <Input
+            placeholder={"Email"}
+            onChangeText={(e) => setUser(e)}
+            textValue={user}
+          />
         </InputContainer>
 
         <InputContainer>
@@ -78,7 +82,7 @@ const Login = ({ navigation }) => {
           </InputLabel>
           <Input
             placeholder={"Mot de passe"}
-            onChangeText={setPassword}
+            onChangeText={(e) => setPassword(e)}
             secureTextEntry={true}
             textValue={password}
           ></Input>
