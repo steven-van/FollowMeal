@@ -3,16 +3,14 @@ import { View, TouchableOpacity } from "react-native";
 import { GREEN, LIGHTGRAY } from "../components/config.js";
 
 const ButtonContainer = styled.View`
-  background-color: ${LIGHTGRAY};
-  background-color: ${GREEN};
-  padding: 7px 20px;
+  padding: 7px 15px;
   border-radius: 20px;
   align-items: center;
   justify-content: center;
 `;
 
 const ButtonText = styled.Text`
-  color: white;
+  color: black;
   font-family: "FredokaOne";
   font-size: 16px;
 `;

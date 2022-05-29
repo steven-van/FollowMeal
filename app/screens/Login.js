@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (credentials) => {
+  const handleLogin = useCallback(async (credentials) => {
     return fetch(`http://${host}:3000/auth/login`, {
       method: "POST",
       headers: {
@@ -48,13 +48,15 @@ const Login = ({ navigation }) => {
         if (json.login == true && json.data != "expired") {
           storeToken(json.token);
           setError("");
+          setUser("");
+          setPassword("");
           navigation.navigate("Slider", json.data);
         } else {
           setError("Identifiant ou mot de passe incorrect");
         }
       })
       .catch((err) => console.log(err));
-  };
+  });
 
   return (
     <SafeContainer>
@@ -68,7 +70,7 @@ const Login = ({ navigation }) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={(text) => setUser(text)} />
+          <Input placeholder={"Email"} onChangeText={setUser}  textValue={user}/>
         </InputContainer>
 
         <InputContainer>
@@ -77,8 +79,9 @@ const Login = ({ navigation }) => {
           </InputLabel>
           <Input
             placeholder={"Mot de passe"}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={setPassword}
             secureTextEntry={true}
+            textValue={password}
           ></Input>
         </InputContainer>
       </LoginContainer>

@@ -16,6 +16,7 @@ const Input = ({
   additionnalStyle,
   secureTextEntry = false,
   maxLength,
+  textValue,
   onChangeText,
   type = "default",
 }) => {
@@ -25,6 +26,7 @@ const Input = ({
       style={additionnalStyle}
       maxLength={maxLength}
       keyboardType={type}
+      value={textValue}
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
     />
