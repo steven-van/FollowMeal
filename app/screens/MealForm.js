@@ -27,7 +27,7 @@ const ScrollViewContainer = styled.ScrollView`
   margin: 10px 0;
 `;
 
-const FormAlert = ({message}) => Alert.alert(
+const FormAlert = (message) => Alert.alert(
     "Réponse",
     message,
     [
@@ -48,7 +48,7 @@ const MealForm = ({ navigation }) => {
   const [name, setName] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [price, setPrice] = useState(0.0);
-  const [category, setCategory] = useState(0.0);
+  const [category, setCategory] = useState("");
   const [ingredient, setIngredient] = useState([]);
 
   useEffect(() => {
@@ -84,7 +84,10 @@ const MealForm = ({ navigation }) => {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => FormAlert(response))
+      .then((response) => {
+        console.log(response);
+        FormAlert(response.message)
+      })
       .catch((err) => {
         FormAlert("Une erreur est survenue");
         console.warn(err);
