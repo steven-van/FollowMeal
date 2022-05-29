@@ -8,9 +8,8 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { host } from "../config/host";
-// import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const FormContainer = styled.View`
@@ -26,6 +25,18 @@ const ScrollViewContainer = styled.ScrollView`
   width: 80%;
   margin: 10px 0;
 `;
+
+
+const FormAlert = ({message}) => Alert.alert(
+    "Réponse",
+    message,
+    [
+        {
+            text:"Ok",
+            style:"cancel"
+        }
+    ]
+);
 
 const MealForm = ({ navigation }) => {
 
@@ -63,7 +74,7 @@ const MealForm = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
-        console.log("Nouvelle liste d'ingrédient : ")
+        console.log("Ingredient : ")
         ingredient.forEach(element => console.log("  - " + element.name));
     }, [ingredient]);
 
@@ -75,8 +86,8 @@ const MealForm = ({ navigation }) => {
         },
         body: JSON.stringify(data),
         })
-        .then((response) => console.log("Done"))
-        .catch((err) => console.log(err));
+        .then((response) => FormAlert(response))
+        .catch((err) => FormAlert("Une erreur est parvenue."));
     };
 
     const ingredientObj = useMemo(() => {
