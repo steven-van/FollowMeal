@@ -29,7 +29,7 @@ sudo npm install -g react-native-cli
 
 ## Setting host file
 
-Get your IPV4 with `ipconfig` or `ipaddr` and put it in the following file `./app/config/host.js` :
+Get your IPV4 with `ipconfig` or `ipaddr` and put it in the following file `./app/services/host.js` :
 ```js
 module.exports = {host:"YOUR IP ADDR"};
 ```
