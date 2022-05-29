@@ -58,6 +58,7 @@ const User = ({route, navigation}) => {
     }}
     width={Dimensions.get("window").width} // from react-native
     height={220}
+    fromZero = {true}
     yAxisLabel="Score "
     yAxisInterval={1} // optional, defaults to 1
     chartConfig={{
@@ -73,7 +74,7 @@ const User = ({route, navigation}) => {
       propsForDots: {
         r: "6",
         strokeWidth: "2",
-        stroke: "#ffa726"
+        stroke: "#DE4E4E"
       }
     }}
     bezier
