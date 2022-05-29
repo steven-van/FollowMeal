@@ -31,7 +31,7 @@ const storeToken = async (value) => {
 };
 
 const Login = ({ navigation }) => {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -68,7 +68,10 @@ const Login = ({ navigation }) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={(text) => setUser(text)} />
+          <Input
+            placeholder={"Email"}
+            onChangeText={(text) => setEmail(text)}
+          />
         </InputContainer>
 
         <InputContainer>
@@ -98,7 +101,7 @@ const Login = ({ navigation }) => {
       )}
 
       <Button
-        handlePress={() => handleLogin({ user: user, password: password })}
+        handlePress={() => handleLogin({ email: email, password: password })}
       >
         {"Se connecter"}
       </Button>

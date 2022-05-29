@@ -9,6 +9,7 @@ import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
 import { RED } from "../components/config.js";
+import { host } from "../config/host";
 
 const SignupContainer = styled.View`
   margin-bottom: 15px;
@@ -42,13 +43,14 @@ const Unit = styled.Text`
 `;
 
 const Signup = ({ navigation }) => {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [age, setAge] = useState(0);
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
-  const [sportPerWeek, setSportPerWeek] = useState(0);
+  const [sportsPerWeek, setSportsPerWeek] = useState(0);
   const [pricePerMeal, setPricePerMeal] = useState(0);
 
   const handleSignup = async (credentials) => {
@@ -60,7 +62,9 @@ const Signup = ({ navigation }) => {
       body: JSON.stringify(credentials),
     })
       .then((response) => response.json())
-      .then((json) => {})
+      .then((json) => {
+        console.log(json);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -76,7 +80,17 @@ const Signup = ({ navigation }) => {
             <InputLabel additionnalStyle={{ marginBottom: 5 }}>
               {"Identifiant"}
             </InputLabel>
-            <Input placeholder={"Email"} onChangeText={(e) => setUser(e)} />
+            <Input placeholder={"Email"} onChangeText={(e) => setEmail(e)} />
+          </InputContainer>
+
+          <InputContainer>
+            <InputLabel additionnalStyle={{ marginBottom: 5 }}>
+              {"Nom d'utilisateur"}
+            </InputLabel>
+            <Input
+              placeholder={"Nom d'utilisateur"}
+              onChangeText={(e) => setUsername(e)}
+            />
           </InputContainer>
 
           <InputContainer>
@@ -160,7 +174,7 @@ const Signup = ({ navigation }) => {
             <Input
               type={"numeric"}
               maxLength={1}
-              onChangeText={(e) => setSportPerWeek(e)}
+              onChangeText={(e) => setSportsPerWeek(e)}
               placeholder={"Ex : 3"}
             />
             <Unit>{"jrs / sem"}</Unit>
@@ -181,15 +195,16 @@ const Signup = ({ navigation }) => {
         </FormContainer>
         <Button
           handlePress={() =>
-            console.log(
-              user,
-              password,
-              age,
-              height,
-              weight,
-              sportPerWeek,
-              pricePerMeal
-            )
+            handleSignup({
+              email: email,
+              username: username,
+              password: password,
+              age: age,
+              height: height,
+              weight: weight,
+              sportsPerWeek: sportsPerWeek,
+              pricePerMeal: pricePerMeal,
+            })
           }
         >
           {"S'inscrire"}
