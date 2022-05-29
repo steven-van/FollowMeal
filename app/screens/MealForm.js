@@ -9,7 +9,7 @@ import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
 import { StyleSheet, Text } from "react-native";
-import { host } from "../services/host";
+import { host } from "../config/host";
 // import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import DropDownPicker from 'react-native-dropdown-picker';
 
