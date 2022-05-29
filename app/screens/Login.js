@@ -10,7 +10,7 @@ import { ICON, STYLE } from "../components/config.js";
 import { Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RED } from "../components/config.js";
-import { host } from "../config/host";
+import { host } from "../services/host";
 
 const LoginContainer = styled.View`
   width: 60%;

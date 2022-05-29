@@ -10,8 +10,9 @@ import { Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { host } from "./app/config/host";
+import { host } from "./app/services/host";
 import Signup from "./app/screens/Signup.js";
+import MealForm from "./app/screens/MealForm.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -94,6 +95,8 @@ const App = () => {
               iconName = "ios-search";
             } else if (route.name === "Signup") {
               iconName = "ios-person-add";
+            } else if (route.name === "MealForm") {
+              iconName = "ios-pizza";
             }
 
             // Icon returned
@@ -115,6 +118,7 @@ const App = () => {
         <Tab.Screen name={"Login"} component={Login} />
         <Tab.Screen name={"Slider"} component={Slider} />
         <Tab.Screen name={"Signup"} component={Signup} />
+        <Tab.Screen name={"MealForm"} component={MealForm} />
       </Tab.Navigator>
     </NavigationContainer>
   );

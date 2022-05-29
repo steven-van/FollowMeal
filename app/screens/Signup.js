@@ -9,6 +9,7 @@ import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { StyleSheet, Image } from "react-native";
 import { RED } from "../components/config.js";
+import { host } from "../services/host";
 
 const SignupContainer = styled.View`
   width: 60%;
