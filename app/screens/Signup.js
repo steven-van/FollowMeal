@@ -63,7 +63,7 @@ const Signup = ({ navigation }) => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        navigation.navigate("Slider"); //TO CHANGE
       })
       .catch((err) => console.log(err));
   };
