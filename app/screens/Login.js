@@ -31,7 +31,7 @@ const storeToken = async (value) => {
 };
 
 const Login = ({ navigation }) => {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -43,19 +43,18 @@ const Login = ({ navigation }) => {
       },
       body: JSON.stringify(credentials),
     })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.login == true && json.data != "expired") {
-          storeToken(json.token);
-          setError("");
-          setUser("");
-          setPassword("");
-          navigation.navigate("Slider", json.data);
-        } else {
-          setError("Identifiant ou mot de passe incorrect");
-        }
+      .then((response) => {
+        console.log(response);
+        return response.json();
       })
-      .catch((err) => console.log(err));
+      .then((json) => {
+        storeToken(json.token);
+        setError("");
+        setPassword("");
+        setEmail("");
+        navigation.navigate("Slider", json.data);
+      })
+      .catch((err) => setError("Identifiant ou mot de passe incorrect"));
   });
 
   return (
@@ -101,7 +100,7 @@ const Login = ({ navigation }) => {
       )}
 
       <Button
-        handlePress={() => handleLogin({ user: user, password: password })}
+        handlePress={() => handleLogin({ email: email, password: password })}
       >
         {"Se connecter"}
       </Button>

@@ -4,7 +4,7 @@ import { GREEN, LIGHTGRAY } from "../components/config.js";
 
 const ButtonContainer = styled.View`
   background-color: ${LIGHTGRAY};
-  background-color: ${GREEN};
+  background-color: ${(props) => props.bgColor};
   padding: 15px 25px;
   border-radius: 20px;
   align-items: center;
@@ -17,11 +17,16 @@ const ButtonText = styled.Text`
   font-size: 16px;
 `;
 
-const Button = ({ children, handlePress, additionnalStyle }) => {
+const Button = ({
+  children,
+  handlePress,
+  bgColor = GREEN,
+  additionnalStyle,
+}) => {
   return (
     <View style={additionnalStyle}>
       <TouchableOpacity onPress={handlePress}>
-        <ButtonContainer>
+        <ButtonContainer bgColor={bgColor}>
           <ButtonText>{children}</ButtonText>
         </ButtonContainer>
       </TouchableOpacity>
