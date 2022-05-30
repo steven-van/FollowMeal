@@ -131,7 +131,9 @@ const User = ({route, navigation}) => {
     if(meals ==null || dates == null || scores == null || progressData == null){
         return(
         <SafeContainer>
-
+            <Title fontSize={"26px"} additionnalStyle={{marginBottom:10}}>
+                {'Bonjour ' + userdata.username}
+            </Title>
         </SafeContainer>
         )
     }
