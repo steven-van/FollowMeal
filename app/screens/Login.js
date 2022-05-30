@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -30,10 +30,46 @@ const storeToken = async (value) => {
   }
 };
 
+
+
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const getToken = useCallback(async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("auth_token");
+  
+      if (jsonValue === null) {
+        console.log("No token");
+        return {
+          login: false,
+          data: null,
+        };
+      } else {
+        return fetch(`http://${host}:3000/auth/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: jsonValue }),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            if (json.login == true && json.data != "expired") {
+              navigation.navigate("User",json.data);
+            } else {
+              console.log("Token expired");
+              AsyncStorage.removeItem("auth_token");
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (e) {
+      console.log("ERROR " + e);
+    }
+  });
 
   const handleLogin = useCallback(async (credentials) => {
     return fetch(`http://${host}:3000/auth/login`, {
@@ -57,6 +93,17 @@ const Login = ({ navigation }) => {
       })
       .catch((err) => setError("Identifiant ou mot de passe incorrect"));
   });
+
+  useEffect(() => {
+    async function prepare () {
+        try {
+          await getToken();
+        } catch (e) {
+          console.warn(e);
+        }
+      }
+    prepare();
+  }, [])
 
   return (
     <SafeContainer>
