@@ -48,19 +48,12 @@ const Login = ({ navigation }) => {
         if (json.login == true && json.data != "expired") {
           storeToken(json.token);
           setError("");
-          console.log(json.data);
+          setPassword("");
+          setEmail("");
           navigation.navigate("User",json.data);
-          navigation.navigate("Slider", json.data);
         } else {
           setError("Identifiant ou mot de passe incorrect");
         }
-      })
-      .then((json) => {
-        storeToken(json.token);
-        setError("");
-        setPassword("");
-        setEmail("");
-        navigation.navigate("Slider", json.data);
       })
       .catch((err) => setError("Identifiant ou mot de passe incorrect"));
   });

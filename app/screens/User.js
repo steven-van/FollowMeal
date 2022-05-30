@@ -13,6 +13,8 @@ const screenWidth = Dimensions.get("window").width - 30;
 const User = ({route, navigation}) => {
 
     const userdata = route.params;
+    
+
     const [meals,setMeals] = useState(null);
     const [dates,setDates] = useState(null);
     const [scores,setScores] = useState(null);
@@ -20,6 +22,7 @@ const User = ({route, navigation}) => {
     const [progressData, setProgressData] = useState(null);
 
     useEffect(() => {
+
         async function prepare() {
             try{
                 await fetch(`http://${host}:3000/user/scores/${userdata.id}`,{
@@ -37,9 +40,9 @@ const User = ({route, navigation}) => {
                         labels:["Score nutritif", "Score budgetaire", "Score total"],
                         data:[recentScores.nutr_score/100, recentScores.budg_score/100, recentScores.score/100],
                         colors: [
-                            "rgba(255, 0, 0,0.5)",
-                            "rgba(238, 130, 238,0.6)",
-                            "rgba(106, 90, 205,0.5)",
+                            "rgba(222, 78, 78, 0.6)",
+                            "rgba(255, 122, 0, 0.5)",
+                            "rgba(115, 210, 143, 0.5)"
                           ],
                     };
 
@@ -99,6 +102,8 @@ const User = ({route, navigation}) => {
                 backgroundColor: "#73D28f",
                 backgroundGradientFrom: "#73D28f",
                 backgroundGradientTo: "#73D28f",
+                backgroundGradientFromOpacity: 0.7,
+                backgroundGradientToOpacity: 1,
                 decimalPlaces: 2, // optional, defaults to 2dp
                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -140,21 +145,20 @@ const User = ({route, navigation}) => {
             <ProgressChart 
             data={progressData}
             width={screenWidth}
-            height={220}
-            strokeWidth={16}
-            radius={32}
+            height={170}
+            strokeWidth={7}
+            withCustomBarColorFromData={true}
+            radius={35}
             chartConfig={{
+                backgroundGradientFromOpacity: 0,
+                backgroundGradientToOpacity: 0,
                 backgroundColor: "#73D28f",
                 backgroundGradientFrom: "#73D28f",
                 backgroundGradientTo: "#73D28f",
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                propsForLabels:{
-                    fontSize : "10",
-                }
+                color: (opacity = 1, _index) => `rgba(0,0,0,${opacity})`,
+                propsForLabels: { fontSize : "10", },
             }}
-            hideLegend={false}
             />
         </View>
         <View>

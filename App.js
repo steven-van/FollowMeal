@@ -40,9 +40,9 @@ const getToken = async () => {
         .then((response) => response.json())
         .then((json) => {
           if (json.login == true && json.data != "expired") {
-            // to do, change screen to slider and passing @json.data
-            //navigation.navigate('Slider', json.data);
+            const data = json.data;
           } else {
+            console.log("Token expired");
             AsyncStorage.removeItem("auth_token");
           }
         })

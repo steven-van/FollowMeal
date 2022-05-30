@@ -70,7 +70,6 @@ const Signup = ({ navigation }) => {
 
   return (
     <SafeContainer>
-      <Image style={styles.mediumIcon} source={ICON} />
       <Title fontSize={"25px"} additionnalStyle={{ marginTop: 30 }}>
         {"Inscription"}
       </Title>
