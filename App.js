@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Login from "./app/screens/Login.js";
+import User from "./app/screens/User.js";
 import Icon from "react-native-vector-icons/Ionicons";
 import Slider from "./app/screens/Slider.js";
+
 import { GREEN, RED } from "./app/components/config.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -13,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { host } from "./app/config/host";
 import Signup from "./app/screens/Signup.js";
 import MealForm from "./app/screens/MealForm.js";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -91,6 +94,8 @@ const App = () => {
 
             if (route.name === "Login") {
               iconName = "ios-person";
+            } else if ( route.name == "User"){
+              iconName = "ios-nutrition";
             } else if (route.name === "Slider") {
               iconName = "ios-search";
             } else if (route.name === "Signup") {
@@ -116,6 +121,7 @@ const App = () => {
         })}
       >
         <Tab.Screen name={"Login"} component={Login} />
+        <Tab.Screen name={"User"} component={User}/>
         <Tab.Screen name={"Slider"} component={Slider} />
         <Tab.Screen name={"Signup"} component={Signup} />
         <Tab.Screen name={"MealForm"} component={MealForm} />

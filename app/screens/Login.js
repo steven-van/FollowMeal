@@ -43,9 +43,17 @@ const Login = ({ navigation }) => {
       },
       body: JSON.stringify(credentials),
     })
-      .then((response) => {
-        console.log(response);
-        return response.json();
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.login == true && json.data != "expired") {
+          storeToken(json.token);
+          setError("");
+          console.log(json.data);
+          navigation.navigate("User",json.data);
+          navigation.navigate("Slider", json.data);
+        } else {
+          setError("Identifiant ou mot de passe incorrect");
+        }
       })
       .then((json) => {
         storeToken(json.token);
