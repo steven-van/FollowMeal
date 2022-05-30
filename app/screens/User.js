@@ -17,7 +17,7 @@ const User = ({route, navigation}) => {
     useEffect(() => {
         async function prepare() {
             try{
-                await fetch(`http://${host}:3000/user/meals/${userdata.id}`,{
+                await fetch(`http://${host}:3000/user/scores/${userdata.id}`,{
                     method : "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const User = ({route, navigation}) => {
                     var objs = []
                     const item = json.map(e =>{
                         objd.push(e.date);
-                        objs.push(e.price);
+                        objs.push(e.score);
                     })
                     setDates(objd);
                     setScores(objs);

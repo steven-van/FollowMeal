@@ -54,7 +54,6 @@ const getToken = async () => {
 };
 
 const App = () => {
-  const [token, setToken] = useState(null);
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
