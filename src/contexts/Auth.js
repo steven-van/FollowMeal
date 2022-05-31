@@ -19,7 +19,8 @@ export const AuthProvider = ({children}) => {
             const _authData = await checkToken({token:JSON.parse(authToken)});
 
             if (_authData.auth) {
-              setAuthData(_authData.data);
+                console.log(_authData.data);
+                setAuthData(_authData.data);
             }
           } catch (error) {
               console.warn("Parse error");
@@ -31,6 +32,7 @@ export const AuthProvider = ({children}) => {
     const signIn = async (credentials) => {
         const _authData = await userSignIn(credentials);
         if (_authData.auth) {
+            console.log(_authData.data);
             setAuthData(_authData.data);
             AsyncStorage.setItem("auth_token", JSON.stringify(_authData.data.token));
         } 
