@@ -1,4 +1,4 @@
-// import AsyncStorage from '@react-native-community/async-storage';
+
 import { host } from "../config/host";
 
 const getUser = async (credentials) => {
@@ -16,7 +16,7 @@ const getUser = async (credentials) => {
         .catch((err) => console.warn(err));
 }
 
-const checkToken = async ({token}) => {
+export const checkToken = async ({token}) => {
     return await fetch(`http://${host}:3000/auth/`, {
         method: "POST",
         headers: {
@@ -31,18 +31,10 @@ const checkToken = async ({token}) => {
         .catch((err) => console.log(err));
 }
 
-const signIn = async (credentials) => {
+export const userSignIn = async (credentials) => {
     try {
         return await getUser(credentials);
     } catch (err) {
         console.error("The Promise is rejected!", error);
     }
 }
-
-// const signOut = async () => {
-//     try {
-//         await AsyncStorage.removeItem("auth_token");
-//     } catch (err) {
-//         console.error("The Promise is rejected!", error);
-//     }
-// }

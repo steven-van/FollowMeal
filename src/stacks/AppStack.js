@@ -42,9 +42,9 @@ const AppStack = () => {
         tabBarShowLabel: false,
     })}
     >
-    <Tab.Screen name={"User"} component={User}/>
-    <Tab.Screen name={"Slider"} component={Slider} />
-    <Tab.Screen name={"MealForm"} component={MealForm} />
+      <Tab.Screen name={"User"} component={User}/>
+      <Tab.Screen name={"Slider"} component={Slider} />
+      <Tab.Screen name={"MealForm"} component={MealForm} />
     </Tab.Navigator>
   );
 };

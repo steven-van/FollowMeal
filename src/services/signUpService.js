@@ -2,7 +2,7 @@
 import { host } from "../config/host";
 
 
-const signUp = async (credentials) => {
+const userSignUp = async (credentials) => {
     return await fetch(`http://${host}:3000/auth/signup`, {
         method: "POST",
         headers: {
@@ -16,4 +16,3 @@ const signUp = async (credentials) => {
         })
         .catch((err) => console.log(err));
 };
-

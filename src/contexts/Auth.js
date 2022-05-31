@@ -1,8 +1,8 @@
 import React, {createContext , useState, useContext, useEffect} from 'react';
-import authService from "../services/authService";
+import {checkToken, userSignIn } from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const UserAuthContext = createContext();
+const UserAuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
@@ -16,27 +16,30 @@ export const AuthProvider = ({children}) => {
     const loadStorageData = async () => {
         try {
             const authToken = await AsyncStorage.getItem("auth_token");
-            const _authData = authService.checkToken({token:JSON.parse(authToken)});
+            const _authData = await checkToken({token:JSON.parse(authToken)});
 
             if (_authData.auth) {
               setAuthData(_authData.data);
             }
           } catch (error) {
-              console.warn(error);
+              console.warn("Parse error");
           } finally {
             setLoading(false);
           }
     };
 
     const signIn = async (credentials) => {
-        const _authData = await authService.signIn(credentials);
-        setAuthData(_authData.data);
-        AsyncStorage.setItem("auth_token", JSON.stringify(_authData.token));
+        const _authData = await userSignIn(credentials);
+        if (_authData.auth) {
+            setAuthData(_authData.data);
+            AsyncStorage.setItem("auth_token", JSON.stringify(_authData.data.token));
+        } 
+        
     };
 
     const signOut = async () => {
         await AsyncStorage.removeItem("auth_token");
-        setAuthData(undefined);
+        setAuthData(null);
     };
 
     const signUp = async (credentials) => {
@@ -56,10 +59,4 @@ export const AuthProvider = ({children}) => {
     );
 };
 
-export function useAuth() {
-    const context = useContext(UserAuthContext);
-    if (!context) {
-        throw new Error('useAuth must be used within an AuthProvider');
-    }
-    return context;
-}
+export default UserAuthContext;

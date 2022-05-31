@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Image } from "react-native";
 
@@ -11,7 +11,7 @@ import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { RED } from "../components/config.js";
 
-import { useAuth } from "../contexts/Auth";
+import UserAuthContext from "../contexts/Auth";
 
 const LoginContainer = styled.View`
   width: 60%;
@@ -24,7 +24,7 @@ const InputContainer = styled.View`
 
 const Login = () => {
 
-  const auth = useAuth();
+  const auth = useContext(UserAuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

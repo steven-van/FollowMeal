@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useContext } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { AuthStack } from "../stacks/AuthStack";
-import { AppStack } from "../stacks/AppStack";
+import AuthStack from "../stacks/AuthStack";
+import AppStack from "../stacks/AppStack";
 
-import { useAuth } from "../contexts/Auth";
+import UserAuthContext from "../contexts/Auth";
 
 import * as SplashScreen from "expo-splash-screen";
 import { Roboto_400Regular } from "@expo-google-fonts/roboto";
@@ -12,7 +12,7 @@ import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 import * as Font from "expo-font";
 
 const Router = () => {
-  const {userData} = useAuth();
+  const {authData} = useContext(UserAuthContext);
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const Router = () => {
           Roboto: Roboto_400Regular,
           FredokaOne: FredokaOne_400Regular,
         });
-        await getToken();
       } catch (e) {
         console.warn(e);
       } finally {
@@ -45,7 +44,12 @@ const Router = () => {
 
   return (
     <NavigationContainer onReady = {onLayoutRootView}>
-      {(typeof userData != undefined || userData.token) ? <AppStack /> : <AuthStack />}
+      {(authData) ? 
+      (
+        <AppStack />
+      ) : (
+        <AuthStack />
+      )}
     </NavigationContainer>
   );
 };

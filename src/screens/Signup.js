@@ -9,9 +9,6 @@ import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
 import { StyleSheet} from "react-native";
 import { RED } from "../components/config.js";
-import { host } from "../config/host";
-
-import { useAuth } from "../contexts/Auth";
 
 const SignupContainer = styled.View`
   margin-bottom: 15px;
@@ -44,7 +41,7 @@ const Unit = styled.Text`
   text-align: center;
 `;
 
-const Signup = ({ navigation }) => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
