@@ -1,13 +1,12 @@
 import React from "react";
-
+import Icon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import User from "./src/screens/User.js.js";
-import Icon from "react-native-vector-icons/Ionicons";
-import Slider from "./src/screens/Slider.js.js";
-import MealForm from "./src/screens/MealForm.js.js";
+import User from "../screens/User.js";
+import Slider from "../screens/Slider.js";
+import MealForm from "../screens/MealForm.js";
 
-import { GREEN, RED } from "./src/components/config.js.js";
+import { GREEN, RED } from "../components/config.js";
 
 const Tab = createBottomTabNavigator();
 

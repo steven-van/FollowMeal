@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
-import { Router } from "./src/routes/Router";
+import Router from "./src/routes/Router";
 
-import { AuthProvider } from "./src/services/Auth"
+import { AuthProvider } from "./src/contexts/Auth"
 
 const App = () => {
   return (

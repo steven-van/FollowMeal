@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useMemo} from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -13,6 +13,8 @@ import { host } from "../config/host";
 // import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import DropDownPicker from "react-native-dropdown-picker";
 
+import { useAuth } from "../contexts/Auth";
+
 const FormContainer = styled.View`
   width: 60%;
   margin-bottom: 10px;
@@ -20,11 +22,6 @@ const FormContainer = styled.View`
 
 const InputContainer = styled.View`
   margin-top: 20px;
-`;
-
-const ScrollViewContainer = styled.ScrollView`
-  width: 80%;
-  margin: 10px 0;
 `;
 
 const FormAlert = (message) => Alert.alert(
@@ -38,7 +35,8 @@ const FormAlert = (message) => Alert.alert(
     ]
 );
 
-const MealForm = ({ navigation }) => {
+const MealForm = () => {
+  const auth = useAuth()
   // Picker
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Signup from "./src/screens/Signup.js.js";
-import Login from "./src/screens/Login.js.js";
+import Signup from "../screens/Signup.js";
+import Login from "../screens/Login.js";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 

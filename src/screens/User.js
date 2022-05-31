@@ -10,10 +10,9 @@ import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 
 const screenWidth = Dimensions.get("window").width - 30;
 
-const User = ({route, navigation}) => {
+const User = () => {
 
-    const userdata = route.params;
-    
+    const userdata = useAuth();
 
     const [meals,setMeals] = useState(null);
     const [dates,setDates] = useState(null);

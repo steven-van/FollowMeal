@@ -6,10 +6,12 @@ import Input from "../components/Input";
 import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
-import { ICON, STYLE } from "../components/config.js";
-import { StyleSheet, Image } from "react-native";
+import { STYLE } from "../components/config.js";
+import { StyleSheet} from "react-native";
 import { RED } from "../components/config.js";
 import { host } from "../config/host";
+
+import { useAuth } from "../contexts/Auth";
 
 const SignupContainer = styled.View`
   margin-bottom: 15px;
@@ -53,20 +55,9 @@ const Signup = ({ navigation }) => {
   const [sportsPerWeek, setSportsPerWeek] = useState(0);
   const [pricePerMeal, setPricePerMeal] = useState(0);
 
-  const handleSignup = async (credentials) => {
-    return fetch(`http://${host}:3000/auth/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        navigation.navigate("Slider"); //TO CHANGE
-      })
-      .catch((err) => console.log(err));
-  };
+  const handleSignup = useCallback(async (credentials) => {
+    auth.signUp(credentials);
+  }, []);
 
   return (
     <SafeContainer>
