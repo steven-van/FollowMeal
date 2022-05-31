@@ -1,6 +1,7 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import AppIntroSlider from "react-native-app-intro-slider";
+import { StyleSheet, Image } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
 import styled from "styled-components/native";
 import Input from "../components/Input";
 import InputLabel from "../components/InputLabel";
@@ -8,7 +9,9 @@ import Button from "../components/Button";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE, STORYSET } from "../components/config.js";
-import { StyleSheet, Image } from "react-native";
+
+import { useAuth } from "../contexts/Auth";
+
 
 const slides = [
   {
@@ -42,6 +45,7 @@ const Unit = styled.Text`
   width: 60px;
 `;
 const Slider = () => {
+  const auth = useAuth();
   const [age, setAge] = React.useState(0);
   const [height, setHeight] = React.useState(0);
   const [weight, setWeight] = React.useState(0);

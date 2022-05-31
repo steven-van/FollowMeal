@@ -9,13 +9,13 @@ import { host } from "../config/host";
 import Button from "../components/Button";
 import { FredokaOne_400Regular } from "@expo-google-fonts/fredoka-one";
 
-import UserAuthContext from "../contexts/Auth";
+import { useAuth }from "../contexts/Auth";
 
 const screenWidth = Dimensions.get("window").width - 30;
 
 const User = () => {
 
-    const {authData, signOut} = useContext(UserAuthContext);
+    const {authData, signOut} = useAuth();
 
     const [meals,setMeals] = useState(null);
     const [dates,setDates] = useState(null);

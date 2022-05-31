@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -9,6 +9,8 @@ import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
 import { StyleSheet} from "react-native";
 import { RED } from "../components/config.js";
+
+import { useAuth } from "../contexts/Auth";
 
 const SignupContainer = styled.View`
   margin-bottom: 15px;
@@ -41,7 +43,10 @@ const Unit = styled.Text`
   text-align: center;
 `;
 
-const Signup = () => {
+const Signup = ({navigation}) => {
+
+  const auth = useAuth();
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -180,6 +185,13 @@ const Signup = () => {
             <Unit>{"€ / repas"}</Unit>
           </FormInputContainer>
         </FormContainer>
+        <Button
+          handlePress={() =>
+            navigation.navigate("Login")
+          }
+        >
+          {"Revenir à la connexion"}
+        </Button>
         <Button
           handlePress={() =>
             handleSignup({

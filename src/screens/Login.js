@@ -11,7 +11,7 @@ import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { RED } from "../components/config.js";
 
-import UserAuthContext from "../contexts/Auth";
+import { useAuth } from "../contexts/Auth";
 
 const LoginContainer = styled.View`
   width: 60%;
@@ -22,9 +22,9 @@ const InputContainer = styled.View`
   margin-top: 30px;
 `;
 
-const Login = () => {
+const Login = ({navigation}) => {
 
-  const auth = useContext(UserAuthContext);
+  const auth = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -78,6 +78,12 @@ const Login = () => {
           {error}
         </Title>
       )}
+
+      <Button
+        handlePress={() => navigation.navigate("Signup")}
+      >
+        {"S'inscrire"}
+      </Button>
 
       <Button
         handlePress={() => handleLogin({ email: email, password: password })}

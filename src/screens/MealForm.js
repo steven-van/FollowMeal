@@ -13,7 +13,7 @@ import { host } from "../config/host";
 // import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import DropDownPicker from "react-native-dropdown-picker";
 
-import UserAuthContext from "../contexts/Auth";
+import { useAuth } from "../contexts/Auth";
 
 const FormContainer = styled.View`
   width: 60%;
@@ -36,7 +36,7 @@ const FormAlert = (message) => Alert.alert(
 );
 
 const MealForm = () => {
-  const auth = useContext(UserAuthContext);
+  const auth = useAuth();
   // Picker
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
