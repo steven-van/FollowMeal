@@ -132,7 +132,7 @@ const User = ({route, navigation}) => {
         return(
         <SafeContainer>
             <Title fontSize={"26px"} additionnalStyle={{marginBottom:10}}>
-                {'Bonjour ' + userdata.username}
+                {'Bonjour '}
             </Title>
         </SafeContainer>
         )

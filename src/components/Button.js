@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { View, TouchableOpacity } from "react-native";
-import { GREEN, LIGHTGRAY } from "../components/config.js";
+import { GREEN, LIGHTGRAY } from "./config.js";
 
 const ButtonContainer = styled.View`
   background-color: ${LIGHTGRAY};
