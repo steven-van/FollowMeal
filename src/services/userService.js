@@ -16,3 +16,18 @@ const userSignUp = async (credentials) => {
         })
         .catch((err) => console.log(err));
 };
+
+const updateUserInfo = async (info) => {
+    return await fetch(`http://${host}:3000/user/${info.id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(info),
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            return json;
+        })
+        .catch((err) => console.log(err));
+}
