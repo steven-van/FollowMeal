@@ -1,5 +1,5 @@
-import React, {createContext , useState, useContext, useEffect} from 'react';
-import {checkToken, userSignIn} from "../services/authService";
+import React, { createContext , useState, useContext, useEffect } from 'react';
+import { checkToken, userSignIn } from "../services/authService";
 import { userSignUp, updateUserInfo } from "../services/userService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -31,11 +31,15 @@ export const AuthProvider = ({children}) => {
     };
 
     const updateUser = async (info) => {
-        await updateUserInfo(info);
-    }
+        const response = await updateUserInfo(info);
+        if (typeof(response) != undefined || response !== null) {
+            console.log(response);
+        }
+    };
 
     const signIn = async (credentials) => {
         const _authData = await userSignIn(credentials);
+        console.log(_authData);
         if (_authData.auth) {
             console.log(_authData.data);
             setAuthData(_authData.data);

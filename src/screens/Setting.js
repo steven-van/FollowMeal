@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Image } from "react-native";
+import React, { useEffect, useCallback } from "react";
+import { StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import styled from "styled-components/native";
@@ -30,13 +30,20 @@ const Unit = styled.Text`
   font-family: "FredokaOne";
   width: 60px;
 `;
+
+
+
 const Setting = () => {
-  const {authData} = useAuth();
+  const {authData, updateUser} = useAuth();
   const [age, setAge] = React.useState("");
   const [height, setHeight] = React.useState("");
   const [weight, setWeight] = React.useState("");
   const [sportPerWeek, setSportPerWeek] = React.useState("");
   const [pricePerMeal, setPricePerMeal] = React.useState("");
+
+  const handleUpdate = async (info) => {
+    updateUser(info);
+  };
 
   useEffect(() => {
     async function prepare() {
@@ -47,7 +54,7 @@ const Setting = () => {
       setPricePerMeal(authData.price_per_meal.toString());
     };
     prepare();
-  }, [authData]);
+  }, []);
 
  
   return (
@@ -101,7 +108,7 @@ const Setting = () => {
         </InputContainer>
       </Form>
 
-      <Button>{"Mettre à jour"}</Button>
+      <Button handlePress={handleUpdate(authData)}>{"Mettre à jour"}</Button>
 
       <StatusBar style="auto" />
     </SafeContainer>

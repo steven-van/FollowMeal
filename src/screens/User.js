@@ -17,7 +17,6 @@ const User = ({navigation}) => {
 
     const {authData, signOut} = useAuth();
 
-    const [meals,setMeals] = useState(null);
     const [dates,setDates] = useState(null);
     const [scores,setScores] = useState(null);
     const [progressData, setProgressData] = useState(null);
@@ -37,7 +36,6 @@ const User = ({navigation}) => {
                 })
                 .then((response) => response.json())
                 .then(json =>  {
-                    console.log(json);
                     if (json === null || typeof(json) == undefined || json.length == 0) {
                         authData.meals = null;
                     } else {
