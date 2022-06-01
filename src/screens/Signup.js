@@ -7,8 +7,10 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
-import { StyleSheet} from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { RED } from "../components/config.js";
+import NavLink from "../components/NavLink";
+import FredokaText from "../components/FredokaText";
 
 import { useAuth } from "../contexts/Auth";
 
@@ -43,8 +45,7 @@ const Unit = styled.Text`
   text-align: center;
 `;
 
-const Signup = ({navigation}) => {
-
+const Signup = ({ navigation }) => {
   const auth = useAuth();
 
   const [email, setEmail] = useState("");
@@ -185,13 +186,7 @@ const Signup = ({navigation}) => {
             <Unit>{"€ / repas"}</Unit>
           </FormInputContainer>
         </FormContainer>
-        <Button
-          handlePress={() =>
-            navigation.navigate("Login")
-          }
-        >
-          {"Revenir à la connexion"}
-        </Button>
+
         <Button
           handlePress={() =>
             handleSignup({
@@ -209,6 +204,12 @@ const Signup = ({navigation}) => {
           {"S'inscrire"}
         </Button>
       </ScrollViewContainer>
+      <Text>
+        <FredokaText>{"Vous avez déja un compte ?"} </FredokaText>{" "}
+        <NavLink handlePress={() => navigation.navigate("Login")}>
+          {"Se connecter"}
+        </NavLink>
+      </Text>
 
       <StatusBar style="auto" />
     </SafeContainer>

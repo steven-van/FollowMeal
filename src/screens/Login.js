@@ -1,12 +1,13 @@
 import { useState, useCallback, useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Image } from "react-native";
-
+import { StyleSheet, Image, Text } from "react-native";
+import FredokaText from "../components/FredokaText";
 import styled from "styled-components/native";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
+import NavLink from "../components/NavLink";
 import SafeContainer from "../components/SafeContainer";
 import { ICON, STYLE } from "../components/config.js";
 import { RED } from "../components/config.js";
@@ -22,8 +23,7 @@ const InputContainer = styled.View`
   margin-top: 30px;
 `;
 
-const Login = ({navigation}) => {
-
+const Login = ({ navigation }) => {
   const auth = useAuth();
 
   const [email, setEmail] = useState("");
@@ -49,7 +49,11 @@ const Login = ({navigation}) => {
           <InputLabel additionnalStyle={{ marginBottom: 9 }}>
             {"Identifiant"}
           </InputLabel>
-          <Input placeholder={"Email"} onChangeText={setEmail}  textValue={email}/>
+          <Input
+            placeholder={"Email"}
+            onChangeText={setEmail}
+            textValue={email}
+          />
         </InputContainer>
 
         <InputContainer>
@@ -80,16 +84,23 @@ const Login = ({navigation}) => {
       )}
 
       <Button
-        handlePress={() => navigation.navigate("Signup")}
-      >
-        {"S'inscrire"}
-      </Button>
-
-      <Button
         handlePress={() => handleLogin({ email: email, password: password })}
       >
         {"Se connecter"}
       </Button>
+
+      <Text
+        style={{
+          position: "absolute",
+          bottom: 0,
+          marginBottom: 10,
+        }}
+      >
+        <FredokaText>{"Pas encore inscrit ?"} </FredokaText>{" "}
+        <NavLink handlePress={() => navigation.navigate("Signup")}>
+          {"S'inscrire"}
+        </NavLink>
+      </Text>
 
       <StatusBar style="auto" />
     </SafeContainer>
