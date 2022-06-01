@@ -3,7 +3,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import User from "../screens/User.js";
-import Slider from "../screens/Slider.js";
+import Setting from "../screens/Setting.js";
 import MealForm from "../screens/MealForm.js";
 
 import { GREEN, RED } from "../components/config.js";
@@ -19,11 +19,11 @@ const AppStack = () => {
         let iconName;
 
         if (route.name == "User"){
-            iconName = "ios-nutrition";
-        } else if (route.name === "Slider") {
-            iconName = "ios-search";
+            iconName = "ios-person";
+        } else if (route.name === "Setting") {
+            iconName = "ios-settings";
         } else if (route.name === "MealForm") {
-            iconName = "ios-pizza";
+            iconName = "ios-nutrition";
         }
 
         // Icon returned
@@ -43,7 +43,7 @@ const AppStack = () => {
     })}
     >
       <Tab.Screen name={"User"} component={User}/>
-      <Tab.Screen name={"Slider"} component={Slider} />
+      <Tab.Screen name={"Setting"} component={Setting} />
       <Tab.Screen name={"MealForm"} component={MealForm} />
     </Tab.Navigator>
   );

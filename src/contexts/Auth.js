@@ -1,5 +1,5 @@
 import React, {createContext , useState, useContext, useEffect} from 'react';
-import {checkToken, userSignIn } from "../services/authService";
+import {checkToken, userSignIn, userSignUp } from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserAuthContext = createContext();
@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) => {
     };
 
     const signUp = async (credentials) => {
-        await authService.signUp(credentials);
+        await userSignUp(credentials);
     }
 
     return (

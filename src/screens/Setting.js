@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
@@ -13,23 +13,9 @@ import { ICON, STYLE, STORYSET } from "../components/config.js";
 import { useAuth } from "../contexts/Auth";
 
 
-const slides = [
-  {
-    name: "welcome",
-    description:
-      "Suivez votre alimentation de près et" +
-      "adopter un mode de vie sain et surtout pas cher !",
-    icon: STORYSET,
-  },
-  {
-    name: "form",
-    description: "Veuillez renseigner les informations ci-dessous",
-  },
-];
-
 const Form = styled.View`
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 `;
 const InputContainer = styled.View`
   flex-direction: row;
@@ -44,35 +30,45 @@ const Unit = styled.Text`
   font-family: "FredokaOne";
   width: 60px;
 `;
-const Slider = () => {
-  const auth = useAuth();
-  const [age, setAge] = React.useState(0);
-  const [height, setHeight] = React.useState(0);
-  const [weight, setWeight] = React.useState(0);
-  const [sportPerWeek, setSportPerWeek] = React.useState(0);
-  const [goalPerMeal, setGoalPerMeal] = React.useState(0);
+const Setting = () => {
+  const {authData} = useAuth();
+  const [age, setAge] = React.useState("");
+  const [height, setHeight] = React.useState("");
+  const [weight, setWeight] = React.useState("");
+  const [sportPerWeek, setSportPerWeek] = React.useState("");
+  const [pricePerMeal, setPricePerMeal] = React.useState("");
+
+  useEffect(() => {
+    async function prepare() {
+      setAge(authData.age.toString());
+      setHeight(authData.height.toString());
+      setWeight(authData.weight.toString());
+      setSportPerWeek(authData.sports_per_week.toString());
+      setPricePerMeal(authData.price_per_meal.toString());
+    };
+    prepare();
+  }, [authData]);
 
  
   return (
     <SafeContainer>
-      <Image style={styles.mediumIcon} source={ICON} />
       <Title
-        fontSize={"15px"}
-        additionnalStyle={{ width: "70%", textAlign: "center", marginTop: 20 }}
+        fontSize={"24px"}
+        additionnalStyle={{ width: "70%", textAlign: "center", marginTop: 20, marginBottom: 30 }}
       >
-        {slides[1].description}
+        {"Vos informations"}
       </Title>
 
-      <Form>
+      <Form >
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Age"}</InputLabel>
-          <Input type={"numeric"} maxLength={2} placeholder={"Ex : 18"} />
+          <Input type={"numeric"} maxLength={2} placeholder={"Ex : 18"} textValue = {age} />
           <Unit>{""}</Unit>
         </InputContainer>
 
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Taille"}</InputLabel>
-          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 170"} />
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 170"} textValue = {height}/>
           <Unit>{"cm"}</Unit>
         </InputContainer>
 
@@ -83,6 +79,7 @@ const Slider = () => {
             type={"numeric"}
             maxLength={3}
             placeholder={"Ex : 60"}
+            textValue={weight}
           />
           <Unit>{"kg"}</Unit>
         </InputContainer>
@@ -91,7 +88,7 @@ const Slider = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Pratique sportive"}
           </InputLabel>
-          <Input type={"numeric"} maxLength={1} placeholder={"Ex : 3"} />
+          <Input type={"numeric"} maxLength={1} placeholder={"Ex : 3"} textValue={sportPerWeek} />
           <Unit>{"jours / semaine"}</Unit>
         </InputContainer>
 
@@ -99,19 +96,19 @@ const Slider = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Objectif"}
           </InputLabel>
-          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 18"} />
+          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 18"} textValue={pricePerMeal} />
           <Unit>{"€ / repas"}</Unit>
         </InputContainer>
       </Form>
 
-      <Button>{"Confirmer"}</Button>
+      <Button>{"Mettre à jour"}</Button>
 
       <StatusBar style="auto" />
     </SafeContainer>
   );
 };
 
-export default Slider;
+export default Setting;
 
 const styles = StyleSheet.create({
   ...STYLE,

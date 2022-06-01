@@ -13,7 +13,7 @@ import { useAuth }from "../contexts/Auth";
 
 const screenWidth = Dimensions.get("window").width - 30;
 
-const User = () => {
+const User = ({navigation}) => {
 
     const {authData, signOut} = useAuth();
 
@@ -37,14 +37,14 @@ const User = () => {
                 })
                 .then((response) => response.json())
                 .then(json =>  {
-
+                    console.log(json);
                     if (json === null || typeof(json) == undefined || json.length == 0) {
-                        //to do
+                        authData.meals = null;
                     } else {
-                        var recentScores = json[json.length - 1];
-                        const progress = {
+                        var _recent = json[json.length - 1];
+                        const _progress = {
                             labels:["Score nutritif", "Score budgetaire", "Score total"],
-                            data:[recentScores.nutr_score/100, recentScores.budg_score/100, recentScores.score/100],
+                            data:[_recent.nutr_score/100, _recent.budg_score/100, _recent.score/100],
                             colors: [
                                 "rgba(222, 78, 78, 0.6)",
                                 "rgba(255, 122, 0, 0.5)",
@@ -52,17 +52,17 @@ const User = () => {
                             ],
                         };
 
-                        var objd = [];
-                        var objs = [];
-                        const item = json.map(e =>{
-                            objd.push(e.date);
-                            objs.push(e.score);
+                        var _dates = [];
+                        var _scores = [];
+                        json.forEach(e =>{
+                            _dates.push(e.date);
+                            _scores.push(e.score);
                         })
 
-                        setMeals(json);
-                        setProgressData(progress);
-                        setDates(objd);
-                        setScores(objs);
+                        authData.meals = json;
+                        setProgressData(_progress);
+                        setDates(_dates);
+                        setScores(_scores);
                     }
 
                 });
@@ -71,7 +71,7 @@ const User = () => {
             }
         }
         prepare();
-        if(meals!=null){
+        if(authData.meals!=null){
             CreateLineChart(dates,scores)
         }
 
@@ -136,12 +136,16 @@ const User = () => {
             />)
     }
 
-    if(meals ==null || dates == null || scores == null || progressData == null){
+    if(authData.meals == null || dates == null || scores == null || progressData == null){
         return(
         <SafeContainer>
             <Title fontSize={"26px"} additionnalStyle={{marginBottom:10}}>
-                {'Bonjour '}
+                {'Bonjour ' + authData.username}
             </Title>
+            <Button additionnalStyle={{marginBottom:10}}
+            handlePress={() => navigation.navigate("MealForm")}>
+                {"Ajouter un repas"}
+            </Button>
             <Button
                 handlePress={() => handleSignout()}
                 >
@@ -179,6 +183,10 @@ const User = () => {
             <View>
                 <CreateLineChart dates = {dates} scores = {scores}/>
             </View>
+            <Button additionnalStyle={{marginBottom:10}}
+            handlePress={() => navigation.navigate("MealForm")}>
+                {"Ajouter un repas"}
+            </Button>
             <Button handlePress={() => handleSignout()}>
                 {"Se déconnecter"}
             </Button>
