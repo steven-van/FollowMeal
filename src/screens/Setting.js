@@ -8,7 +8,7 @@ import InputLabel from "../components/InputLabel";
 import Button from "../components/Button";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
-import { ICON, STYLE, STORYSET } from "../components/config.js";
+import { RED, GREEN, ICON, STYLE, STORYSET } from "../components/config.js";
 
 import { useAuth } from "../contexts/Auth";
 
@@ -34,24 +34,36 @@ const Unit = styled.Text`
 
 
 const Setting = () => {
-  const {authData, updateUser} = useAuth();
+  const auth = useAuth();
+
+  const [message, setMessage] = React.useState("");
+  const [messageCol, setMessageCol] = React.useState(RED);
+
   const [age, setAge] = React.useState("");
   const [height, setHeight] = React.useState("");
   const [weight, setWeight] = React.useState("");
   const [sportPerWeek, setSportPerWeek] = React.useState("");
   const [pricePerMeal, setPricePerMeal] = React.useState("");
 
-  const handleUpdate = async (info) => {
-    updateUser(info);
-  };
+  const handleUpdate = useCallback(async (info) => {
+    const _response = await auth.updateUser(info);
+    if (_response) {
+      setMessageCol(GREEN);
+      setMessage("Mis à jour");
+    } else {
+      setMessageCol(RED);
+      setMessage("Une erreur est survenue");
+    }
+  }, []);
 
   useEffect(() => {
     async function prepare() {
-      setAge(authData.age.toString());
-      setHeight(authData.height.toString());
-      setWeight(authData.weight.toString());
-      setSportPerWeek(authData.sports_per_week.toString());
-      setPricePerMeal(authData.price_per_meal.toString());
+      const _data = auth.authData;
+      setAge(_data.age.toString());
+      setHeight(_data.height.toString());
+      setWeight(_data.weight.toString());
+      setSportPerWeek(_data.sports_per_week.toString());
+      setPricePerMeal(_data.price_per_meal.toString());
     };
     prepare();
   }, []);
@@ -69,13 +81,21 @@ const Setting = () => {
       <Form >
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Age"}</InputLabel>
-          <Input type={"numeric"} maxLength={2} placeholder={"Ex : 18"} textValue = {age} />
+          <Input type={"numeric"} 
+            maxLength={2} 
+            placeholder={"Ex : 18"} 
+            onChangeText={setAge}
+            textValue = {age} />
           <Unit>{""}</Unit>
         </InputContainer>
 
         <InputContainer>
           <InputLabel additionnalStyle={styles.inputTag}>{"Taille"}</InputLabel>
-          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 170"} textValue = {height}/>
+          <Input type={"numeric"}
+          maxLength={3}
+          placeholder={"Ex : 170"}
+          onChangeText={setHeight}
+          textValue = {height}/>
           <Unit>{"cm"}</Unit>
         </InputContainer>
 
@@ -86,6 +106,7 @@ const Setting = () => {
             type={"numeric"}
             maxLength={3}
             placeholder={"Ex : 60"}
+            onChangeText={setWeight}
             textValue={weight}
           />
           <Unit>{"kg"}</Unit>
@@ -95,7 +116,11 @@ const Setting = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Pratique sportive"}
           </InputLabel>
-          <Input type={"numeric"} maxLength={1} placeholder={"Ex : 3"} textValue={sportPerWeek} />
+          <Input type={"numeric"} 
+              maxLength={1} 
+              placeholder={"Ex : 3"} 
+              onChangeText={setSportPerWeek}
+              textValue={sportPerWeek} />
           <Unit>{"jours / semaine"}</Unit>
         </InputContainer>
 
@@ -103,12 +128,32 @@ const Setting = () => {
           <InputLabel additionnalStyle={styles.inputTag}>
             {"Objectif"}
           </InputLabel>
-          <Input type={"numeric"} maxLength={3} placeholder={"Ex : 18"} textValue={pricePerMeal} />
+          <Input type={"numeric"} 
+            maxLength={3} 
+            placeholder={"Ex : 18"} 
+            onChangeText={setPricePerMeal}
+            textValue={pricePerMeal} />
           <Unit>{"€ / repas"}</Unit>
         </InputContainer>
       </Form>
 
-      <Button handlePress={handleUpdate(authData)}>{"Mettre à jour"}</Button>
+      {message.length > 0 && (
+        <Title
+          fontSize={"12px"}
+          additionnalStyle={{
+            width: "70%",
+            textAlign: "center",
+            marginBottom: 20,
+            color: messageCol,
+          }}
+        >
+          {message}
+        </Title>
+      )}
+
+      <Button handlePress={() => handleUpdate({id:authData.id, age, height, weight, sports_per_week:sportPerWeek, price_per_meal:pricePerMeal})}>
+        {"Mettre à jour"}
+      </Button>
 
       <StatusBar style="auto" />
     </SafeContainer>

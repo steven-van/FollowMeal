@@ -20,7 +20,6 @@ export const AuthProvider = ({children}) => {
             const _authData = await checkToken({token:JSON.parse(authToken)});
 
             if (_authData.auth) {
-                console.log(_authData.data);
                 setAuthData(_authData.data);
             }
           } catch (error) {
@@ -31,17 +30,13 @@ export const AuthProvider = ({children}) => {
     };
 
     const updateUser = async (info) => {
-        const response = await updateUserInfo(info);
-        if (typeof(response) != undefined || response !== null) {
-            console.log(response);
-        }
+        const _check = await updateUserInfo(info);
+        return _check ? _check.response : false;
     };
 
     const signIn = async (credentials) => {
         const _authData = await userSignIn(credentials);
-        console.log(_authData);
         if (_authData.auth) {
-            console.log(_authData.data);
             setAuthData(_authData.data);
             AsyncStorage.setItem("auth_token", JSON.stringify(_authData.data.token));
         } 
