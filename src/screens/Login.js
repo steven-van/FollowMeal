@@ -9,8 +9,7 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import NavLink from "../components/NavLink";
 import SafeContainer from "../components/SafeContainer";
-import { ICON, STYLE } from "../components/config.js";
-import { RED } from "../components/config.js";
+import { RED, ICON, STYLE } from "../components/config.js";
 
 import { useAuth } from "../contexts/Auth";
 
