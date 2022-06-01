@@ -59,7 +59,10 @@ const Signup = ({ navigation }) => {
   const [pricePerMeal, setPricePerMeal] = useState(0);
 
   const handleSignup = useCallback(async (credentials) => {
-    auth.signUp(credentials);
+    const _check = await auth.signUp(credentials);
+    if (_check) {
+      navigation.navigate("Login");
+    }
   }, []);
 
   return (

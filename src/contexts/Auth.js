@@ -54,7 +54,8 @@ export const AuthProvider = ({children}) => {
     };
 
     const signUp = async (credentials) => {
-        await userSignUp(credentials);
+        const _response = await userSignUp(credentials);
+        return _response.response;
     }
 
     return (
