@@ -56,6 +56,8 @@ const Signup = ({ navigation }) => {
     const [weight, setWeight] = useState(0);
     const [sportsPerWeek, setSportsPerWeek] = useState(0);
     const [pricePerMeal, setPricePerMeal] = useState(0);
+    const [nutrRatio, setNutrRatio] = useState(0);
+    const [budgRatio, setBudgRatio] = useState(0);
     const [passwordError, setPasswordError] = useState("");
 
     const passwordValidation = () => {
@@ -187,7 +189,6 @@ const Signup = ({ navigation }) => {
                             max={7}
                             knobColor={RED}
                             step={1}
-                            initialValue={0}
                             valueLabelsBackgroundColor={RED}
                             outOfRangeBarColor={GREEN}
                             valueOnChange={(value) => {
@@ -210,6 +211,45 @@ const Signup = ({ navigation }) => {
                         />
                         <Unit>{"€ / repas"}</Unit>
                     </FormInputContainer>
+
+                    <FormInputContainer>
+                        <InputLabel additionnalStyle={styles.inputTag}>
+                            {"Score nutritif"}
+                        </InputLabel>
+                        <Slider
+                            styleSize={"small"}
+                            min={0}
+                            max={10}
+                            knobColor={RED}
+                            step={1}
+                            valueLabelsBackgroundColor={RED}
+                            outOfRangeBarColor={GREEN}
+                            valueOnChange={(value) => {
+                                setNutrRatio(value);
+                            }}
+                        />
+
+                        <Unit>{""}</Unit>
+                    </FormInputContainer>
+                    <FormInputContainer>
+                        <InputLabel additionnalStyle={styles.inputTag}>
+                            {"Score budgétaire"}
+                        </InputLabel>
+                        <Slider
+                            styleSize={"small"}
+                            min={0}
+                            max={10}
+                            knobColor={RED}
+                            step={1}
+                            valueLabelsBackgroundColor={RED}
+                            outOfRangeBarColor={GREEN}
+                            valueOnChange={(value) => {
+                                setBudgRatio(value);
+                            }}
+                        />
+
+                        <Unit>{""}</Unit>
+                    </FormInputContainer>
                 </FormContainer>
 
                 <Button
@@ -223,6 +263,8 @@ const Signup = ({ navigation }) => {
                             weight: weight,
                             sportsPerWeek: sportsPerWeek,
                             pricePerMeal: pricePerMeal,
+                            nutrRatio: nutrRatio,
+                            budgRatio: budgRatio,
                         })
                     }
                 >
