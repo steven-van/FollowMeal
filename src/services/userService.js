@@ -9,9 +9,7 @@ const updateUser = async (info) => {
         },
         body: JSON.stringify(info),
     })
-        .then((response) => {
-            return response.json();
-        })
+        .then((response) => response.json())
         .catch((err) => console.log(err));
 };
 
