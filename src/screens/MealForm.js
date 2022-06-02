@@ -8,10 +8,13 @@ import InputLabel from "../components/InputLabel";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { STYLE } from "../components/config.js";
-import { StyleSheet, Alert } from "react-native";
+import { popAlert } from "../components/Alert";
+
+import { StyleSheet } from "react-native";
 import { host } from "../config/host";
 // import { Picker, onOpen } from 'react-native-actions-sheet-picker';
 import DropDownPicker from "react-native-dropdown-picker";
+
 
 import { useAuth } from "../contexts/Auth";
 
@@ -23,17 +26,6 @@ const FormContainer = styled.View`
 const InputContainer = styled.View`
   margin-top: 20px;
 `;
-
-const FormAlert = (message) => Alert.alert(
-    "Réponse",
-    message,
-    [
-        {
-            text:"Ok",
-            style:"cancel"
-        }
-    ]
-);
 
 const MealForm = () => {
   const auth = useAuth();
@@ -84,10 +76,10 @@ const MealForm = () => {
     })
       .then((response) => {
         console.log(response);
-        FormAlert(response.message)
+        popAlert("Réponse", response.message)
       })
       .catch((err) => {
-        FormAlert("Une erreur est survenue");
+        popAlert("Retour serveur", "Une erreur est survenue");
         console.warn(err);
       });
   };
