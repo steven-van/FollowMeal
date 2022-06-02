@@ -32,3 +32,21 @@ export const updateUserInfo = async (info) => {
         console.error("The Promise is rejected!", error);
     }
 };
+
+export const userAddMeal = async (data) => {
+    try {
+        if (data) {
+            return await fetch(`http://${host}:3000/food/meal`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+            })
+        } else {
+            return {response:false, message:"Error from server"};
+        }
+    } catch (err) {
+        console.warn(err);
+    }
+};

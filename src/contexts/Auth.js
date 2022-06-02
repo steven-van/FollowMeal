@@ -1,6 +1,6 @@
 import React, { createContext , useState, useContext, useEffect } from 'react';
 import { checkToken, userSignIn } from "../services/authService";
-import { userSignUp, updateUserInfo } from "../services/userService";
+import { userSignUp, updateUserInfo, userAddMeal } from "../services/userService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserAuthContext = createContext();
@@ -22,6 +22,7 @@ export const AuthProvider = ({children}) => {
             if (_authData.auth) {
                 setAuthData(_authData.data);
             } else {
+                setAuthData(null);
                 await AsyncStorage.removeItem("auth_token");
             }
           } catch (error) {
@@ -35,6 +36,10 @@ export const AuthProvider = ({children}) => {
         const _check = await updateUserInfo(info);
         return _check ? _check.response : false;
     };
+
+    const addMeal = async (info) => {
+        return await userAddMeal(info);
+    }
 
     const signIn = async (credentials) => {
         const _authData = await userSignIn(credentials);
@@ -62,6 +67,7 @@ export const AuthProvider = ({children}) => {
             signOut,
             signUp,
             updateUser,
+            addMeal,
         }}>
             {children}
         </UserAuthContext.Provider>

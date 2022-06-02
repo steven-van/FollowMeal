@@ -29,6 +29,7 @@ const InputContainer = styled.View`
 
 const MealForm = () => {
   const auth = useAuth();
+
   // Picker
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -66,22 +67,24 @@ const MealForm = () => {
     ingredient.forEach((element) => console.log("  - " + element.name));
   }, [ingredient]);
 
-  const handleSubmit = async (data) => {
-    return await fetch(`http://${host}:3000/food/meal`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        console.log(response);
-        popAlert("Réponse", response.message)
-      })
-      .catch((err) => {
-        popAlert("Retour serveur", "Une erreur est survenue");
-        console.warn(err);
-      });
+  const handleSubmit = async (info) => {
+
+    const {name, restaurant, price, category, ingredient} = info;
+
+    if (name != ""
+      && restaurant != ""
+      && category != ""
+      && ingredient.length > 0) {
+      const _meal = await auth.addMeal({...info, user:auth.authData});
+      if (_meal && _meal.response) {
+        popAlert("Ajout de repas", "Repas ajouté !");
+        // to update authData context to show new added meal
+      } else {
+        popAlert("Ajout de repas", response.message ? response.message : "Erreur de message");
+      }
+    } else {
+      popAlert("Message", "Au moins une des informations est manquante.");
+    }
   };
 
   const ingredientObj = useMemo(() => {
