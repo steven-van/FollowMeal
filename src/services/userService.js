@@ -22,9 +22,6 @@ export const userSignUp = async (credentials) => {
         body: JSON.stringify(credentials),
     })
         .then((response) => response.json())
-        .then((json) => {
-            return json;
-        })
         .catch((err) => console.log(err));
 };
 
