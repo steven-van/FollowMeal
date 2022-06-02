@@ -212,7 +212,7 @@ const Signup = ({ navigation }) => {
 
                     <FormInputContainer>
                         <InputLabel additionnalStyle={styles.inputTag}>
-                            {"Score nutritif"}
+                            {"Importance nutritionnelle"}
                         </InputLabel>
                         <Slider
                             styleSize={"small"}
@@ -231,7 +231,7 @@ const Signup = ({ navigation }) => {
                     </FormInputContainer>
                     <FormInputContainer>
                         <InputLabel additionnalStyle={styles.inputTag}>
-                            {"Score budgétaire"}
+                            {"Importance budgétaire"}
                         </InputLabel>
                         <Slider
                             styleSize={"small"}
