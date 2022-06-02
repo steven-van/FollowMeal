@@ -164,7 +164,6 @@ const Signup = ({ navigation }) => {
                         />
                         <Unit>{"cm"}</Unit>
                     </FormInputContainer>
-
                     <FormInputContainer>
                         <InputLabel additionnalStyle={styles.inputTag}>
                             {"Poids"}
@@ -177,6 +176,18 @@ const Signup = ({ navigation }) => {
                             placeholder={"Ex : 60"}
                         />
                         <Unit>{"kg"}</Unit>
+                    </FormInputContainer>
+                    <FormInputContainer>
+                        <InputLabel additionnalStyle={styles.inputTag}>
+                            {"Objectif"}
+                        </InputLabel>
+                        <Input
+                            type={"numeric"}
+                            maxLength={3}
+                            onChangeText={(e) => setPricePerMeal(e)}
+                            placeholder={"Ex : 18"}
+                        />
+                        <Unit>{"€ / repas"}</Unit>
                     </FormInputContainer>
 
                     <FormInputContainer>
@@ -197,19 +208,6 @@ const Signup = ({ navigation }) => {
                         />
 
                         <Unit>{"jrs / sem"}</Unit>
-                    </FormInputContainer>
-
-                    <FormInputContainer>
-                        <InputLabel additionnalStyle={styles.inputTag}>
-                            {"Objectif"}
-                        </InputLabel>
-                        <Input
-                            type={"numeric"}
-                            maxLength={3}
-                            onChangeText={(e) => setPricePerMeal(e)}
-                            placeholder={"Ex : 18"}
-                        />
-                        <Unit>{"€ / repas"}</Unit>
                     </FormInputContainer>
 
                     <FormInputContainer>
