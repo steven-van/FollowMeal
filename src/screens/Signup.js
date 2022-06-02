@@ -73,7 +73,10 @@ const Signup = ({ navigation }) => {
                 popAlert("Inscription", "Compte crée !");
                 navigation.navigate("Login");
             } else {
-                popAlert("Inscription", _check.message ? _check.message : "Erreur message");
+                popAlert(
+                    "Inscription",
+                    _check.message ? _check.message : "Erreur message"
+                );
             }
         } else {
             setPasswordError("Les mots de passe ne correspondent pas");

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
@@ -9,6 +9,7 @@ import Button from "../components/Button";
 import Title from "../components/Title";
 import SafeContainer from "../components/SafeContainer";
 import { RED, GREEN, STYLE } from "../components/config.js";
+import { Slider } from "react-native-range-slider-expo";
 
 import { useAuth } from "../contexts/Auth";
 
@@ -39,13 +40,14 @@ const Setting = () => {
     const [age, setAge] = useState("");
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
-    const [sportPerWeek, setSportPerWeek] = useState(0);
+    const [sportsPerWeek, setSportsPerWeek] = useState(0);
     const [pricePerMeal, setPricePerMeal] = useState("");
     const [budgRatio, setBudgRatio] = useState(0);
     const [nutrRatio, setNutrRatio] = useState(0);
 
-    const handleUpdate = useCallback(async (info) => {
+    const handleUpdate = async (info) => {
         const _response = await auth.updateUser(info);
+        console.log("response : ", _response);
         if (_response) {
             setMessageCol(GREEN);
             setMessage("Mis à jour");
@@ -53,7 +55,7 @@ const Setting = () => {
             setMessageCol(RED);
             setMessage("Une erreur est survenue");
         }
-    }, []);
+    };
 
     useEffect(() => {
         async function prepare() {
@@ -62,9 +64,9 @@ const Setting = () => {
             setHeight(_data.height.toString());
             setWeight(_data.weight.toString());
             setPricePerMeal(_data.price_per_meal.toString());
-            setSportPerWeek(_data.sports_per_week);
+            setSportsPerWeek(_data.sports_per_week);
             setBudgRatio(_data.budg_ratio * 10);
-            setNutrRatio(_data.nutrRatio * 10);
+            setNutrRatio(_data.nutr_ratio * 10);
         }
         prepare();
     }, []);
@@ -141,7 +143,7 @@ const Setting = () => {
                     <Unit>{"€ / repas"}</Unit>
                 </InputContainer>
 
-                <FormInputContainer>
+                <InputContainer>
                     <InputLabel additionnalStyle={styles.inputTag}>
                         {"Pratique sportive"}
                     </InputLabel>
@@ -149,7 +151,7 @@ const Setting = () => {
                         styleSize={"small"}
                         min={0}
                         max={7}
-                        initialValue={sportPerWeek}
+                        initialValue={sportsPerWeek}
                         knobColor={RED}
                         step={1}
                         valueLabelsBackgroundColor={RED}
@@ -160,11 +162,11 @@ const Setting = () => {
                     />
 
                     <Unit>{"jrs / sem"}</Unit>
-                </FormInputContainer>
+                </InputContainer>
 
-                <FormInputContainer>
+                <InputContainer>
                     <InputLabel additionnalStyle={styles.inputTag}>
-                        {"Score nutritif"}
+                        {"Importance nutritionnelle"}
                     </InputLabel>
                     <Slider
                         styleSize={"small"}
@@ -181,10 +183,10 @@ const Setting = () => {
                     />
 
                     <Unit>{""}</Unit>
-                </FormInputContainer>
-                <FormInputContainer>
+                </InputContainer>
+                <InputContainer>
                     <InputLabel additionnalStyle={styles.inputTag}>
-                        {"Score budgétaire"}
+                        {"Importance budgétaire"}
                     </InputLabel>
                     <Slider
                         styleSize={"small"}
@@ -201,7 +203,7 @@ const Setting = () => {
                     />
 
                     <Unit>{""}</Unit>
-                </FormInputContainer>
+                </InputContainer>
             </Form>
 
             {message.length > 0 && (
@@ -221,14 +223,14 @@ const Setting = () => {
             <Button
                 handlePress={() =>
                     handleUpdate({
-                        id: authData.id,
-                        age,
-                        height,
-                        weight,
-                        sports_per_week: sportPerWeek,
+                        id: auth.authData.id,
+                        age: age,
+                        height: height,
+                        weight: weight,
+                        sports_per_week: sportsPerWeek,
                         price_per_meal: pricePerMeal,
                         budg_ratio: budgRatio,
-                        nutrRatio: nutrRatio,
+                        nutr_ratio: nutrRatio,
                     })
                 }
             >

@@ -8,15 +8,12 @@ const updateUser = async (info) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(info),
-        })
+    })
         .then((response) => {
-            response.json()
-        })
-        .then((json) => {
-            return json;
+            return response.json();
         })
         .catch((err) => console.log(err));
-}
+};
 
 export const userSignUp = async (credentials) => {
     return await fetch(`http://${host}:3000/auth/signup`, {
@@ -25,7 +22,7 @@ export const userSignUp = async (credentials) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
-        })
+    })
         .then((response) => response.json())
         .then((json) => {
             return json;
@@ -39,4 +36,4 @@ export const updateUserInfo = async (info) => {
     } catch (err) {
         console.error("The Promise is rejected!", error);
     }
-}
+};
