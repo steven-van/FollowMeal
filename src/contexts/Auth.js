@@ -21,6 +21,8 @@ export const AuthProvider = ({children}) => {
 
             if (_authData.auth) {
                 setAuthData(_authData.data);
+            } else {
+                await AsyncStorage.removeItem("auth_token");
             }
           } catch (error) {
               console.warn("Parse error");
@@ -49,8 +51,7 @@ export const AuthProvider = ({children}) => {
     };
 
     const signUp = async (credentials) => {
-        const _response = await userSignUp(credentials);
-        return _response.response;
+        return await userSignUp(credentials);
     }
 
     return (

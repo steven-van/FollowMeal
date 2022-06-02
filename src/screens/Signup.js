@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styled from "styled-components/native";
 import Button from "../components/Button";
@@ -12,6 +12,7 @@ import NavLink from "../components/NavLink";
 import FredokaText from "../components/FredokaText";
 import { useAuth } from "../contexts/Auth";
 import { Slider } from "react-native-range-slider-expo";
+import { popAlert } from "../components/Alert";
 
 const SignupContainer = styled.View`
     margin-bottom: 15px;
@@ -64,13 +65,16 @@ const Signup = ({ navigation }) => {
         return confirm == password && password.length > 0 && confirm.length > 0;
     };
 
-    const handleSignup = (credentials) => {
+    const handleSignup = async (credentials) => {
         if (passwordValidation()) {
             setPasswordError("");
-            // const _check = await auth.signUp(credentials);
-            // if (_check) {
-            //     navigation.navigate("Login");
-            // }
+            const _check = await auth.signUp(credentials);
+            if (_check && _check.response) {
+                popAlert("Inscription", "Compte crée !");
+                navigation.navigate("Login");
+            } else {
+                popAlert("Inscription", _check.message ? _check.message : "Erreur message");
+            }
         } else {
             setPasswordError("Les mots de passe ne correspondent pas");
         }
