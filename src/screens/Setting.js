@@ -47,7 +47,6 @@ const Setting = () => {
 
     const handleUpdate = async (info) => {
         const _response = await auth.updateUser(info);
-        console.log("response : ", _response);
         if (_response) {
             setMessageCol(GREEN);
             setMessage("Mis à jour");
