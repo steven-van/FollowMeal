@@ -19,7 +19,7 @@ export const AuthProvider = ({children}) => {
             const authToken = await AsyncStorage.getItem("auth_token");
             const _authData = await checkToken({token:JSON.parse(authToken)});
 
-            if (_authData.auth) {
+            if (authToken !== null && _authData.auth) {
                 setAuthData(_authData.data);
             } else {
                 setAuthData(null);

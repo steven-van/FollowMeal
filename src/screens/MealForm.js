@@ -69,15 +69,21 @@ const MealForm = () => {
 
   const handleSubmit = async (info) => {
 
-    const {name, restaurant, price, category, ingredient} = info;
+    const {name, restaurant, category, ingredient} = info;
 
     if (name != ""
       && restaurant != ""
       && category != ""
       && ingredient.length > 0) {
       const _meal = await auth.addMeal({...info, user:auth.authData});
+      console.log(_meal);
       if (_meal && _meal.response) {
-        popAlert("Ajout de repas", "Repas ajouté !");
+
+        var _scoreString = "Score final : " + _meal.score.score 
+                          + "\nScore nutritif : " + _meal.score.nutr_score 
+                          + "\nScore budgétaire : " + _meal.score.budg_score;
+
+        popAlert("Ajout de repas", _meal.name + ": \n" + _scoreString);
         // to update authData context to show new added meal
       } else {
         popAlert("Ajout de repas", response.message ? response.message : "Erreur de message");
@@ -190,7 +196,3 @@ const MealForm = () => {
 };
 
 export default MealForm;
-
-const styles = StyleSheet.create({
-  ...STYLE,
-});

@@ -42,7 +42,8 @@ export const userAddMeal = async (data) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-            })
+            }).then((response) => response.json())
+            .catch((err) => console.log(err));
         } else {
             return {response:false, message:"Error from server"};
         }
