@@ -226,10 +226,10 @@ const Setting = () => {
                         age: age,
                         height: height,
                         weight: weight,
-                        sports_per_week: sportsPerWeek,
-                        price_per_meal: pricePerMeal,
-                        budg_ratio: budgRatio,
-                        nutr_ratio: nutrRatio,
+                        sportsPerWeek: sportsPerWeek,
+                        pricePerMeal: pricePerMeal,
+                        budgRatio: budgRatio,
+                        nutrRatio: nutrRatio,
                     })
                 }
             >
